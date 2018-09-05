@@ -4,11 +4,7 @@ Website hosted on GitHub pages <a href="https://sekayasin.github.io/3Fs/UI">here
 
 ## Project Overview
 ### Technologies Used
-<<<<<<< HEAD
 1. Project is Designed using HTML5/CSS3/Js
-=======
-1. Project is Designed using HTML5/CSS3/Js\
->>>>>>> 3ef19e2c92134d25a6eb5248f4c4edef6ded27b8
 2. Background images and images used are embedded using unsplash API, <a href="https://source.unsplash.com/">read more</a> about unsplash API.
 3. ionicons have been used to provide icon fonts, <a href="https://ionicons.com/">read more</a> about ionicons.
 4. GoogleFonts have been used to make the typography beautiful and great, <a href="https://fonts.google.com/">read more</a> about GoogleFonts. 

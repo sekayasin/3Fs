@@ -1,2 +1,567 @@
+/* ---------------------------------------------------- */
+/* Basic Setup */
+/* ---------------------------------------------------- */
 
-/* Our main styles will be here */
+/* 
+iconfonts
+https://ionicons.com/v2/
+
+colors 
+https://flatuicolors.com
+Combination 1 from palette v1
+##orangeFunboy
+Carrot - #e67e22 - Light orange like
+Pumpkin - #d35400 - dark orange like
+
+sections backgrounds
+white-silver
+whitesh - #ecf0f1
+siilver - #bdc3c7
+
+concrete - #95a5a6
+Asbestos - #7f8c8d
+
+palette us
+whitesh - citylights - #dfe6e9
+darksh - Dracula orchid - #2d3436 - footer background
+
+Social media colors
+https://briangardner.com/social-media-colors/
+
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #ffffff;
+    color: #555555;
+    font-family: 'Lato', Arial, sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+}
+
+.row {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.clearfix:before, 
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix { zoom: 1; }
+
+/* headings */
+
+h1, 
+h2, 
+h3 {
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #ffffff;
+    word-spacing: 4px;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 180%;
+    word-spacing: 2px;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+h2:after {
+    content: " ";
+    background-color: #e67e22;
+    width: 100px;
+    height: 3px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+h3 {
+    font-size: 110%;
+    margin-bottom: 15px;
+}
+
+/* Paragraphs */
+
+.hero-intro {
+    line-height: 145%;
+    width: 70%;
+    margin-left: 15%;
+}
+
+.col-box p {
+    font-size: 90%;
+    line-height: 145%;
+}
+
+
+/* icons */
+.i-center {
+    display: block;
+    font-size: 350%;
+    /* width: auto; */
+    text-align: center;
+    color: #e67e22;
+    margin-bottom: 10px;
+}
+
+.i-checkmark {
+    font-size: 120%;
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    color: #e67e22;
+    margin-right: 10px;
+}
+
+/* Buttons */
+
+.btn:link,
+.btn:visited {
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 200px;
+    font-weight: 300;
+    padding: 10px 50px;
+    transition: background-color 0.2s, border 0.2s, color 0.2s;
+}
+
+.btn:hover,
+.btn:active {
+    background-color: #d35400
+}
+
+.btn-full:link,
+.btn-full:visited {
+    background-color: #e67e22;
+    border: 1px solid #e67e22;
+    margin-right: 15px;
+    color: #ffffff;
+}
+
+.btn-full:hover,
+.btn-full:active {
+    border: 1px solid #d35400;
+    background-color: #d35400;
+}
+
+.btn-light:link,
+.btn-light:visited {
+    border: 1px solid #e67e22;
+    color: #e67e22;
+}
+
+.btn-light:hover,
+.btn-light:active {
+    border: 1px solid #d35400;
+    color: #ffffff;
+}
+
+
+
+/* ---------------------------------------------------- */
+/* Header Section */
+/* ---------------------------------------------------- */
+
+header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://source.unsplash.com/nrUU3DEy0hA);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.logo {
+    height: 100px;
+    width: auto;
+    float: left;
+    margin-top: 20px;
+}
+
+.main-nav {
+    float: right;
+    list-style: none;
+    margin-top: 55px;
+}
+
+.main-nav li {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.main-nav li a:link,
+.main-nav li a:visited{
+    padding: 8px 0;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.25s;
+}
+
+.main-nav li a:hover,
+.main-nav li a:active {
+    border-bottom: 2px solid #e67e22
+}
+
+.main-nav li:last-of-type a {
+    font-size: 70%;
+    border: 1px solid #e67e22;
+    border-radius: 100px;
+    padding: 10px;
+    color: #e67e22;
+}
+
+.main-nav li:last-of-type a:hover {
+    color: #ffffff;
+    background-color: #d35400;
+    border: 1px solid #d35400;
+}
+
+.hero-text {
+    position: absolute;
+    width: 1140px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hero-text span {
+    text-transform: capitalize;
+}
+
+.signin {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.signin p,
+.signin p a {
+    color: #ffffff;
+    font-size: 90%;
+    line-height: 145%;
+}
+
+.signin p a {
+    text-decoration: none;
+}
+
+.signin p a:hover {
+    text-decoration: underline;
+    color: #e67e22;
+}
+/* ---------------------------------------------------- */
+/* Features - About-us Section */
+/* ---------------------------------------------------- */
+
+.section-features-about-us, 
+.section-features-about-us .hero-intro {
+    margin-bottom: 60px;
+}
+
+.col {
+    /* column-count: 3;
+    column-gap: 40px;
+    column-width: 100px; */
+    display: flex;
+}
+
+.col-flex {
+    flex: 2;
+}
+
+/* .col-box {
+    order: 3;
+} */
+
+.col-box h3 {
+    text-align: center;
+}
+
+/* ---------------------------------------------------- */
+/* Features - Meals section */
+/* ---------------------------------------------------- */
+
+.section-meals {
+    padding: 0;
+}
+
+.meals-showcase {
+    list-style: none;
+    width: 100%;
+}
+
+.meals-showcase li {
+    display: block;
+    float: left;
+    width: 25%;
+}
+
+.meal-sample {
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: #000000;
+}
+
+.meal-sample img {
+    opacity: 0.5;
+    width: 100%;
+    height: auto;
+    transform: scale(1.15);
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.meal-sample img:hover {
+    opacity: 1;
+    transform: scale(1.03);
+}
+
+/* ---------------------------------------------------- */
+/* Features - door-to-door delivery section */
+/* ---------------------------------------------------- */
+
+.section-door-to-door-delivery {
+    background-color: #dfe6e9;
+    padding-bottom: 30px; 
+}
+
+.section-door-to-door-delivery h2 {
+    padding-top: 30px;
+}
+
+.app-tap-order {
+    width: 40%;
+    border-radius: 10%;
+}
+
+.order-steps:first-child {
+    text-align: right;
+    padding-right: 3%;
+    margin-top: 30px;
+}
+
+.order-steps:last-child {
+    padding-left: 3%;
+    margin-top: 70px;
+}
+
+.order-step {
+    margin-bottom: 50px;
+}
+
+.order-step:last-of-type {
+    margin-bottom: 80px;
+}
+
+.order-step .number {
+    color: #e67e22;
+    border: 2px solid #e67e22;
+    border-radius: 50%;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    font-size: 150%;
+    padding: 5px;
+    float: left;
+    margin-right: 20px;
+}
+
+.btn-app img {
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.btn-app {
+    border: 0;
+}
+
+/* ---------------------------------------------------- */
+/* Features - subscription plan section */
+/* ---------------------------------------------------- */
+
+.section-subscription-plans {
+    background-color: #ecf0f1;
+}
+
+.section-subscription-plans h2 {
+    padding-top: 30px;
+}
+
+.plans {
+    padding-bottom: 30px;
+}
+
+.sub-plan {
+    width: 90%;
+    margin-left: 5%;
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+
+.sub-plan div {
+    padding: 15px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.sub-plan div:first-child {
+    background-color: #fcfcfc;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.sub-plan div:last-child {
+    text-align: center;
+    border: 0;
+}
+
+.price {
+    font-size: 150%;
+    margin-bottom: 10px;
+    font-weight: 300;
+    color: #e67e22;
+}
+
+.price span {
+    font-size: 50%;
+    font-weight: 300;
+}
+
+.price-meal {
+    font-size: 80%;
+}
+
+.meal-toppings ul {
+    list-style: none;
+}
+
+.meal-toppings ul li {
+    padding: 5px 0;
+}
+
+/* ---------------------------------------------------- */
+/* Footer section */
+/* ---------------------------------------------------- */
+
+footer {
+    padding: 50px;
+    background-color: #2d3436;
+}
+
+.footer-nav {
+    float: left;
+}
+
+.social-link {
+    float: right;
+}
+
+.footer-nav-links, 
+.social-links {
+    list-style: none;
+}
+
+.footer-nav-links li, 
+.social-links li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.footer-nav-links li:last-child, 
+.social-links li:last-child {
+    margin-right: 0;
+}
+
+.footer-nav-links li a, 
+.social-links li a {
+    text-decoration: none;
+    border: 0;
+    color: #888888;
+}
+
+.footer-nav-links li a:hover {
+    color: #dddddd;
+}
+
+.social-links li a {
+    font-size: 160%;
+}
+
+.ion-social-facebook-outline,
+.ion-social-twitter-outline,
+.ion-social-googleplus-outline, 
+.ion-social-instagram-outline {
+    transition: color 0.2s;
+}
+
+.ion-social-facebook-outline:hover {
+    color: #3b5998;
+}
+
+.ion-social-twitter-outline:hover {
+    color: #55acee;
+}
+
+.ion-social-googleplus-outline:hover {
+    color: #dc4e41;
+}
+
+.ion-social-instagram-outline:hover {
+    color: #517fa4;
+}
+
+footer p,
+footer p a {
+    color: #888888;
+}
+
+footer p {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 90%;
+}
+
+footer p a {
+    text-decoration: none;
+}
+
+footer p a:hover {
+    color: #dddddd;
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+

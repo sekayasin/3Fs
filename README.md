@@ -1,6 +1,11 @@
 # 3Fs - Fast-Food-Fast
 3Fs (Fast-Food-Fast) is a food delivery service app for a restaurant\
-Website hosted on GitHub pages <a href="https://sekayasin.github.io/3Fs/UI">here</a>
+3Fs Demo Website hosted on GitHub pages <a href="https://sekayasin.github.io/3Fs/UI">here</a>
+### For 3Fs Admin only
+3Fs Admin Login URL can be found <a href="https://sekayasin.github.io/3Fs/UI/admin.html">here</a>
+
+### Project Progress managed with PivotalTracker 
+You check on the project progress board <a href="https://www.pivotaltracker.com/n/projects/2195804">here</a>
 
 ## Project Overview
 ### Technologies Used
@@ -12,7 +17,7 @@ Website hosted on GitHub pages <a href="https://sekayasin.github.io/3Fs/UI">here
 ## Andela Uganda Cohort 12
 3Fs project is a Challenge 1 requirement for **Cohort 12 Andela Uganda** Bootcampers  
 
-## Contact information for thatGuy! our Awesome Developer!
+### Contact information for thatGuy! our Awesome Developer!
 - Name: **Sekabira Yasin** , call me *sekayasin*
 - ping me: sekayasin@gmail.com
 - I hang-out on GitHub, u can <a href="https://github.com/sekayasin">fork me</a> or on my tinkering <a href="https://sekayasin.me/">Portfolio</a>

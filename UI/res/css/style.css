@@ -201,19 +201,23 @@ header {
     margin-top: 20px;
 }
 
-.main-nav {
+.main-nav,
+.user-main-nav {
     float: right;
     list-style: none;
     margin-top: 55px;
 }
 
-.main-nav li {
+.main-nav li,
+.user-main-nav li {
     display: inline-block;
     margin-left: 40px;
 }
 
 .main-nav li a:link,
-.main-nav li a:visited{
+.main-nav li a:visited,
+.user-main-nav li a:link,
+.user-main-nav li a:visited {
     padding: 8px 0;
     color: #ffffff;
     text-decoration: none;
@@ -224,7 +228,9 @@ header {
 }
 
 .main-nav li a:hover,
-.main-nav li a:active {
+.main-nav li a:active,
+.user-main-nav li a:hover,
+.user-main-nav li a:active {
     border-bottom: 2px solid #e67e22
 }
 
@@ -559,8 +565,568 @@ footer p a:hover {
 }
 
 
+/* ---------------------------------------------------- */
+/* Sign-in, Sign-up and user dashboard Pages */
+/* ---------------------------------------------------- */
+
+/* Sign-in Page - header Section */
+
+.signin-header, 
+.signup-header, 
+.userdashboard-header {
+    background-color: #ecf0f1;
+    padding: 10px;
+    border-bottom: 3px solid #e67e22;
+}
+
+.signin-header a {
+    text-decoration: none;
+}
+
+.signin-title,
+.userdashboard-title {
+    float: left;
+}
+
+.signin-title img,
+.userdashboard-title img {
+    width: auto;
+    height: 50px;
+    vertical-align: middle;
+}
+
+.imagebox {
+    position: relative;
+}
+
+.imagebox .imgHover {
+    position: absolute;
+    display: none;
+    left: 1.9px;
+    top: 0;
+}
+
+.imagebox:hover .imgHover {
+    display: block;
+}
 
 
+.signin-signup a {
+    color: #555555;
+}
+
+.signin-signup a:hover {
+    color: #e67e22;
+}
+
+.signin-signup, 
+.userdashboard-notifications {
+    float: right;
+    margin-top: 20px;
+}
+
+/* Sign-in Page - Signin form Section */
+
+.signin-form-section,
+ .signup-form-section,
+ .userdashboard-links {
+    background-color: #f3f4f4;
+    padding: 50px;
+}
+
+.signin-form,
+.signup-form {
+    margin: 50px;
+    background-color: #ffffff;
+    padding: 30px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.signin-form-title {
+    margin: 10px;
+}
+.signin-form-title p,
+.signin-form-subtitle p {
+    text-align: center;
+}
+
+.forgot-pass p {
+    text-align: right;
+}
+
+.forgot-pass p a {
+    text-decoration: none;
+    color: #555555;
+}
+
+.forgot-pass p a:hover {
+    text-decoration: underline;
+    color: #e67e22;
+}
+
+.form-elements {
+    margin: 20px;
+}
+
+.form-elemnets label {
+    margin-bottom: 10px;
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=tel] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 8px;
+    font-size: 16px;
+    border: 1px solid #cccccc;
+}
+
+input[type=text]:hover,
+input[type=password]:hover,
+input[type=email]:hover,
+input[type=tel]:hover {
+    border: 1px solid #e67e22;
+}
+
+input[type=submit] {
+    width: 40%;
+    padding: 10px;
+    background-color: #e67e22;
+    border-radius: 50px;
+    color: #ffffff;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+input[type=submit]:hover {
+    background-color: #d35400;
+}
+
+.signin-signup-after-form p,
+.signup-signin-after-form p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.signin-signup-after-form p a,
+.signup-signin-after-form p a {
+    text-decoration: none;
+    color: #555555;
+}
+
+.signin-signup-after-form p a:hover,
+.signup-signin-after-form p a:hover {
+    color: #e67e22;
+    text-decoration: underline;
+}
+
+/* Sign-in Page - download phone app Section */
+
+.download-3fs-phone-app {
+    background-color: #f3f4f4;
+    padding-top: 20px;
+    border-bottom: 0;
+}
+
+.fff-phone-app {
+    margin: 0 auto; 
+    width: 50%;
+    padding-top: 20px;
+}
+
+.fff-phone-app h4 {
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+}
+
+.fff-phone-app p {
+    text-align: center;
+}
+
+.pos-badges {
+    position: relative;
+}
+
+.phone-app img {
+    width: 50%;
+}
+
+.get-app-badges {
+    position: absolute;
+    top: 40%;
+    left: 60%;
+}
+
+.get-app-badges img {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* ---------------------------------------------------- */
+/* Sign-up Page */
+/* ---------------------------------------------------- */
+
+.signup-img, 
+.signup-intro {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.signup-img img {
+    width: 80%;
+    height: auto;
+    vertical-align: middle;
+}
+
+.signup-intro h4,
+.signup-intro p {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.signup-intro h4 {
+    text-transform: capitalize;
+}
+
+.signup-btn {
+    text-align: center;
+}
+
+.signup-terms-agreemt {
+    font-size: 75%;
+}
+
+.signup-terms-agreemt label a,
+.signup-last-para p a {
+    text-decoration: none;
+}
+
+.signup-last-para p {
+    margin-bottom: 10px;
+}
+
+/* ---------------------------------------------------- */
+/* user dashboard Page */
+/* ---------------------------------------------------- */
+
+.userdashboard-notf-icons {
+    list-style: none;
+    margin-top: -30px;
+}
+
+.userdashboard-notf-icons li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.userdashboard-notf-icons li a {
+    text-decoration: none;
+    color: #555555;
+}
+
+.userdashboard-notf-icons li a:hover {
+    color: #e67e22;
+}
+
+.userdashboard-notf-icons li:nth-child(4) .ion-ios-person-outline {
+    font-size: 250%;
+    padding-right: 10px;
+}
+
+.userdashboard-notf-icons li:nth-child(4) span {
+    font-size: 80%;
+}
+
+.userdashboard-notf-icons li:nth-child(5) .ion-ios-cart-outline {
+    font-size: 150%;
+}
+
+.userdashboard-notf-icons li:nth-child(6) span {
+    font-size: 80%;
+    padding-left: 5px;
+}
+
+.dashboard-links, 
+.dashboard-links-order-history {
+    width: 70%;
+    margin-left: 15%;
+}
+
+.dashboard-links,
+.dashboard-links-order-history {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.dashboard-links li,
+.dashboard-links-order-history li {
+    display:inline-block;
+    margin-right: 20px;
+}
+
+.dashboard-links li a,
+.dashboard-links-order-history li a {
+    text-decoration: none;
+    color: #555555;
+    text-transform: capitalize;
+}
+
+.dashboard-links li a:hover,
+.dashboard-links-order-history li a:hover {
+    color: #e67e22;
+    text-decoration: underline;
+}
+
+.dashboard-links li:first-child a,
+.dashboard-links-order-history li:nth-child(3) a {
+    color: #e67e22;
+    text-decoration: underline;
+}
+
+.fff-wallet,
+.total-receipts,
+.locked {
+    width: 33%;
+    color: #ffffff;
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px
+}
+
+.fff-wallet p, 
+.total-receipts p,
+.locked p {
+    color: #ffffff;
+}
+
+.fff-wallet {
+    background-color: #72c02c;
+    margin-right: 5px;
+}
+
+.total-receipts {
+    background-color: #3498db;
+    margin-right: 5px;
+}
+
+.locked {
+    background-color: #555555;
+}
+
+.dashboard-userinfo {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.userdetails {
+    float: left;
+    width: 50%;
+    border: 8px solid #dddddd;
+    margin-right: 5px;
+    padding: 30px;
+}
+.user-profile {
+    float: left;
+    margin-right: 50px;
+}
+
+.userinfo,
+.user-query {
+    list-style: none;
+}
+
+.userinfo li i{
+    margin-right: 5px;
+}
+
+.userinfo li span,
+.user-query li {
+    font-size: 80%;
+}
+
+.user-queries {
+    float: right;
+}
+
+.user-query li a {
+    text-decoration: none;
+    color: #555555;
+}
+
+.user-query li a:hover {
+    color: #e67e22;
+    text-decoration: underline;
+}
+
+.summary-stats {
+    width: 45%;
+    float: right;
+    margin: 20px;
+}
+
+.past-orders,
+.pending-orders,
+.rejected-orders {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    padding: 25px;
+    border: 8px solid #dddddd;
+    margin-right: 10px;
+    text-align: center;
+    font-size: 150%;
+}
+
+.past-orders {
+    border-bottom-color: #72c02c;
+    border-top-color: #72c02c;
+    border-right-color: #72c02c;
+}
+
+.pending-orders {
+    border-left-color: #3498db;
+}
+
+.rejected-orders {
+    border-bottom-color: #e74c3c;
+    border-left-color: #e74c3c;
+    border-top-color: #e74c3c;
+}
+
+.order-summary-info {
+    margin-top: 30px;
+}
+
+.order-table-header,
+.order-history {
+    margin-bottom: 30px;
+}
+
+.order-header,
+.order-history-header {
+    list-style: none;
+}
+
+.order-header li,
+.order-history-header li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.order-header li a,
+.order-history-header li a {
+    text-decoration: none;
+    color: #555555;
+}
+
+.order-header li a:hover,
+.order-history-header li a:hover {
+    text-decoration: underline;
+    color: #e67e22;
+}
+
+.order-header li:first-child .ion-speakerphone,
+.order-history-header li:first-child .ion-speakerphone {
+    margin-right: 5px;
+}
+
+.order-header li:nth-child(2) a,
+.order-history-header li:nth-child(3) a {
+    color: #e67e22;
+    text-decoration: underline;
+}
+
+.make-order {
+    width: 50%;
+    margin: 0 auto 30px auto;
+}
+
+.order-select-list {
+    font-size: 100%;
+    width: 80%;
+    padding: 10px;
+    color: #555555;
+}
+
+.add-order {
+    margin-left: 5px;
+    text-decoration: none;
+    color: #555555;
+}
+
+.add-order:hover {
+    color: #e67e22;
+}
+
+.orders {
+    border-top: 1px dotted #e67e22;
+    border-bottom: 1px dotted #e67e22;
+    padding: 20px;
+}
+
+.orders .ion-android-restaurant {
+    font-size: 300%;
+}
+
+.orders .ion-ios-close-empty {
+    margin-right: 5px;
+    font-size: 150%;
+}
+
+.orders a {
+    text-decoration: none;
+    color: #555555;
+}
+
+.orders a:hover {
+    color: #e67e22;
+}
+
+.orders a span {
+    font-size: 80%;
+}
+
+.proceed-to-checkout {
+    width: 200px;
+    margin-top: 20px;
+    margin-left: 80%;
+}
+
+.proceed-to-checkout a {
+    text-align: center;
+    text-decoration: none;
+    background-color: #e67e22;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.proceed-to-checkout a:hover {
+    background-color: #d35400;
+}
+
+/* ---------------------------------------------------- */
+/* user logout Page */
+/* ---------------------------------------------------- */
+
+.signin-again {
+    background-color: #72c02c;
+}
+
+.logout-thanks {
+    padding: 30px;
+}
+
+.logout-thanks p {
+    text-align: center;
+    color: #ffffff;
+}
 
 
 

@@ -565,15 +565,16 @@ footer p a:hover {
 }
 
 
-/* ---------------------------------------------------- */
-/* Sign-in, Sign-up and user dashboard Pages */
-/* ---------------------------------------------------- */
+/* -------------------------------------------------------------------*/
+/* User Sign-in, Sign-up, user dashboard , Admin login and dashboard  */
+/* -------------------------------------------------------------------*/
 
 /* Sign-in Page - header Section */
 
 .signin-header, 
 .signup-header, 
-.userdashboard-header {
+.userdashboard-header,
+.admin-header {
     background-color: #ecf0f1;
     padding: 10px;
     border-bottom: 3px solid #e67e22;
@@ -589,7 +590,8 @@ footer p a:hover {
 }
 
 .signin-title img,
-.userdashboard-title img {
+.userdashboard-title img,
+.admin-title img {
     width: auto;
     height: 50px;
     vertical-align: middle;
@@ -923,15 +925,25 @@ input[type=submit]:hover {
     margin-bottom: 30px;
 }
 
-.userdetails {
+.userdetails, 
+.admin-calendar-time {
     float: left;
+}
+
+.userdetails {
     width: 50%;
     border: 8px solid #dddddd;
     margin-right: 5px;
     padding: 30px;
 }
-.user-profile {
+
+.user-profile, 
+.admin-calendar {
     float: left;
+    margin-right: 50px;
+}
+
+.user-profile {
     margin-right: 50px;
 }
 
@@ -949,7 +961,8 @@ input[type=submit]:hover {
     font-size: 80%;
 }
 
-.user-queries {
+.user-queries,
+.admin-time {
     float: right;
 }
 
@@ -971,7 +984,10 @@ input[type=submit]:hover {
 
 .past-orders,
 .pending-orders,
-.rejected-orders {
+.rejected-orders,
+.sales-in-act-stats,
+.visits-in-act-stats,
+.users-in-act-stats {
     display: inline-block;
     width: 150px;
     height: 150px;
@@ -1004,29 +1020,38 @@ input[type=submit]:hover {
 }
 
 .order-table-header,
-.order-history {
+.order-history,
+.admin-dashboard-links {
     margin-bottom: 30px;
 }
 
 .order-header,
-.order-history-header {
+.order-history-header,
+.admin-dashboard-links-header,
+.admin-dashboard-links-header-additem {
     list-style: none;
 }
 
 .order-header li,
-.order-history-header li {
+.order-history-header li,
+.admin-dashboard-links-header li,
+.admin-dashboard-links-header-additem li {
     display: inline-block;
     margin-right: 20px;
 }
 
 .order-header li a,
-.order-history-header li a {
+.order-history-header li a,
+.admin-dashboard-links-header li a,
+.admin-dashboard-links-header-additem li a {
     text-decoration: none;
     color: #555555;
 }
 
 .order-header li a:hover,
-.order-history-header li a:hover {
+.order-history-header li a:hover,
+.admin-dashboard-links-header li a:hover,
+.admin-dashboard-links-header-additem li a:hover {
     text-decoration: underline;
     color: #e67e22;
 }
@@ -1037,7 +1062,9 @@ input[type=submit]:hover {
 }
 
 .order-header li:nth-child(2) a,
-.order-history-header li:nth-child(3) a {
+.order-history-header li:nth-child(3) a,
+.admin-dashboard-links-header li:nth-child(2) a,
+.admin-dashboard-links-header-additem li:nth-child(3) a {
     color: #e67e22;
     text-decoration: underline;
 }
@@ -1074,8 +1101,9 @@ input[type=submit]:hover {
     font-size: 300%;
 }
 
-.orders .ion-ios-close-empty {
-    margin-right: 5px;
+.orders .ion-ios-close-empty,
+.orders .ion-ios-checkmark-empty {
+    margin-right: 2px;
     font-size: 150%;
 }
 
@@ -1090,6 +1118,21 @@ input[type=submit]:hover {
 
 .orders a span {
     font-size: 80%;
+}
+
+.orders .success, 
+.orders .rejected {
+    padding: 5px;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.orders .success {
+    background-color: #e67e22;
+}
+
+.orders .rejected {
+    background-color: #e74c3c;
 }
 
 .proceed-to-checkout {
@@ -1129,5 +1172,176 @@ input[type=submit]:hover {
 }
 
 
+/* ---------------------------------------------------- */
+/* Admin login Page */
+/* ---------------------------------------------------- */
+
+.admin-userhome-link {
+    width: 30%;
+    margin: 0 auto;
+}
+
+.admin-content {
+    min-height: calc(100vh - 250px);
+    background-color: #f3f4f4;
+}
+
+.admin-footer {
+    height: 250px;
+}
+
+/* ---------------------------------------------------- */
+/* Admin Dashboard */
+/* ---------------------------------------------------- */
+
+.new-users, 
+.new-orders,
+.total-sales,
+.total-visits {
+    width: 20%;
+    color: #ffffff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.new-users p, 
+.new-orders p,
+.total-sales p,
+.total-visits p {
+    color: #ffffff;
+}
+
+.new-users p i, 
+.new-orders p i,
+.total-sales p i,
+.total-visits p i {
+    font-size: 300%;
+}
+
+.new-users {
+    background-color: #199F86;
+}
+
+.new-orders {
+    background-color: #e05d6f;
+}
+
+.total-sales {
+    background-color: #418bca;
+}
+
+.total-visits {
+    background-color: #3f4e61;
+}
+
+.admin-actual-stats p {
+    text-align: center;
+}
+
+.admin-calendar-time {
+    margin-top: 30px;
+    margin-left: 100px;
+}
+
+.admin-calendar div,
+.admin-time div {
+    width: 150px;
+    height: 100px;
+    padding: 10px;
+    text-align: center;
+}
+.admin-calendar div i, 
+.admin-time div i {
+    font-size: 350%;
+    color: #ffffff;
+}
+
+.admin-calendar div:first-child {
+    background-color: #418bca;
+}
+
+.admin-time div:first-child {
+    background-color: #db5554;
+}
+
+.admin-calendar div:nth-child(2),
+.admin-time div:nth-child(2) {
+    background-color: #ffffff;
+}
 
 
+.admin-actual-stats {
+    margin-top: 5px;
+}
+
+.sales-in-act-stats {
+    border-top-color: #418bca;
+    border-right-color: #418bca;
+    border-bottom-color: #418bca;
+    border-left-color: #418bca;
+}
+
+.sales-in-act-stats i,
+.summary-stats .stats-sales {
+    color: #418bca;
+}
+
+.summary-stats .stats-sales,
+.summary-stats .stats-visits,
+.summary-stats .stats-users {
+    text-align: center;
+}
+
+.visits-in-act-stats {
+    border-top-color: #db5554;
+    border-right-color: #db5554;
+    border-bottom-color: #db5554;
+}
+
+.visits-in-act-stats i,
+.summary-stats .stats-visits {
+    color: #db5554;
+}
+
+.users-in-act-stats {
+    border-right-color:  #199F86;
+    border-bottom-color:  #199F86;
+    border-left-color:  #199F86;
+}
+
+.users-in-act-stats i,
+.summary-stats .stats-users {
+    color: #199F86;
+}
+
+.summary-stats i {
+    font-size: 250%;
+}
+
+.admin-dashboard-links {
+    text-align: center;
+}
+
+.add-new-item{
+    width: 40%;
+    margin: 0 auto 30px;
+}
+.enter-new-item,
+.add-new-item-btn {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.add-new-item-btn a {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #e67e22;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.add-new-item-btn a:hover {
+    background-color: #d35400;
+}

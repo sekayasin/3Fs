@@ -1,0 +1,23 @@
+language: python
+python:
+  - "3.6"
+env:
+  global:
+    # - CC_TEST_REPORTER_ID=45d842af29a8b068c42e49b19795d541299e6decce4d023abd9f7f37aa63a184
+install:
+  - pip install pytest
+  - pip install pytest-cov
+  - pip install coveralls
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script:
+  - py.test --cov=api tests/
+  - coverage report -m
+after_script:
+  - ./cc-test-reporter after-build --debug -t lcov --exit-code $TRAVIS_TEST_RESULT
+after_success:
+  - coveralls
+notifications:
+  email: false

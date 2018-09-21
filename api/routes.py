@@ -1,4 +1,5 @@
-from api import fff
+from flask import jsonify
+from api import fff, models
 
 @fff.route('/')
 def index():
@@ -17,3 +18,11 @@ def index():
         </body>
     </html>
     '''
+
+@fff.route('/api/v1/client/menu', methods=['GET'])
+def menu():
+    return jsonify({'menu': models.menu})
+
+@fff.route('/api/v1/orders', methods=['GET'])
+def get_orders():
+    return jsonify({'orders': models.orders})

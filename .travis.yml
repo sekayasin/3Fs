@@ -3,11 +3,9 @@ python:
   - "3.6"
 env:
   global:
-    # - CC_TEST_REPORTER_ID=45d842af29a8b068c42e49b19795d541299e6decce4d023abd9f7f37aa63a184
+    - CC_TEST_REPORTER_ID=8a2b1e533c378f87c186df7d54b916d614233e6d50963612fbb585337ec1e465
 install:
-  - pip install pytest
-  - pip install pytest-cov
-  - pip install coveralls
+  - pip install -r requirements.txt
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter

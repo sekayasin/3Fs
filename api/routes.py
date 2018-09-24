@@ -41,4 +41,36 @@ def get_orders():
     return jsonify({'orders': models.orders})
 
 
+@fff.route('/api/v1/orders', methods=['GET', 'POST'])
+def place_order():
+    """ Function place_order helps the client to place new order
+    and also returns a list of all updated orders """
+    mydata = request.get_json()
+    new_order = {
+        'orderID': mydata['orderID'],
+        'orderStatus': mydata['orderStatus'],
+        'orderDetails': mydata['orderDetails'],
+        'orderQuantity': mydata['orderQuantity'],
+        'orderFees': mydata['orderFees'],
+        'clientName': mydata['clientName'],
+        'clientNumber': mydata['clientNumber'],
+        'clientAddress': mydata['clientAddress'],
+        'assignedDriver': mydata['assignedDriver'],
+        'approvalStatus': mydata['approvalStatus'],
+        'orderRemarks': mydata['orderRemarks']
+    }
+
+    models.orders.append(new_order)
+    return jsonify({'orders': models.orders})
+
+
+@fff.route('/api/v1/orders/<int:id>', methods=['GET'])
+@fff.route('/api/v1/client/orders/<int:id>', methods=['GET'])
+def get_order_by_id(id):
+    """ Function get_order_by_id returns a specific order """
+    order_by_id = [order for order in models.orders \
+    if order['orderID'] == id]
+    return jsonify({'order': order_by_id})
+
+
 

@@ -4,7 +4,8 @@ This tests whether the 3Fs Menu collection is not empty
 '''
 
 def test_orders_available():
-    models.orders = [{
+    models.orders = [
+        {
         'orderID': 1,
         'orderStatus': 'Success',
         'orderDetails': 'Pilawo',
@@ -15,7 +16,7 @@ def test_orders_available():
         'clientAddress': '12A Kevina Rd',
         'assignedDriver': 'Salongo Boda',
         'approvalStatus': 'Accpted',
-        'orderRemarks': 'Completed'
-    }]
+        'orderRemarks': 'Completed'}
+    ]
 
     assert len(models.orders) == 1

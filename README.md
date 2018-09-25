@@ -14,14 +14,15 @@
 You can check on the project progress board <a href="https://www.pivotaltracker.com/n/projects/2195804">here</a>
 
 ## 3Fs API
-3Fs API is hosted on Heroku <a href="https://sekayasin-3fs-api.herokuapp.com/">here</a>\
+3Fs API is hosted on Heroku <a href="https://sekayasin-3fs-api.herokuapp.com/">here</a>
 
 The 3Fs API will serve two parties, the 3fs client(customer) and the administrator (admin).\
 The client will use the api to place an order, query his/her latest orders, and also query a specific order.\
 The Admin will use the api to update client's status order, update menu available at 3fs, query available orders,\
-specfic order, remove completed orders.\
+specfic order, remove completed orders.
  
-The table shows the api endpoints\
+The table shows the api endpoints
+
 | Endpoint | User | Functionality |
 | --- | --- | --- |
 | GET /api/v1/client/menu | client | The client can check the available menu at 3fs takeaway |

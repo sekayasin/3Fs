@@ -27,12 +27,12 @@ The table shows the api endpoints
 | --- | --- | --- |
 | GET /api/v1/client/menu | client | The client can check the available menu at 3fs takeaway |
 | POST /api/v1/orders | client | The client can place a new order |
-| GET /api/v1/client/orders/<clientUsername> | client | The client can get his/her latest orders |
-| GET /api/v1/client/orders/<orderId> | client | The client can get his/her order by orderID |
+| GET /api/v1/client/orders/clientUsername | client | The client can get his/her latest orders |
+| GET /api/v1/client/orders/orderID | client | The client can get his/her order by orderID |
 | GET /api/v1/orders | admin | The admin can get all the available orders |
-| GET /api/v1/orders/<orderID> | admin | The admin can get a specific order |
-| PUT /api/v1/orders/<orderID> | admin | The admin can update status of a specific order |
-| DELETE /api/v1/orders/<orderID> | admin | The admin can remove a completed order |
+| GET /api/v1/orders/orderID | admin | The admin can get a specific order |
+| PUT /api/v1/orders/orderID | admin | The admin can update status of a specific order |
+| DELETE /api/v1/orders/orderID | admin | The admin can remove a completed order |
    
 ## Project Overview
 ### Technologies Used

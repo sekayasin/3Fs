@@ -73,4 +73,26 @@ def get_order_by_id(id):
     return jsonify({'order': order_by_id})
 
 
+@fff.route('/api/v1/orders/<int:id>', methods=['PUT'])
+def update_order_status(id):
+    """ Function update_order_status updates the status of the order """
+    mydata = request.get_json()
+    order_by_id = [order for order in models.orders \
+    if order['orderID'] == id]
+    order_by_id[0]['orderStatus'] = mydata['orderStatus']
+    order_by_id[0]['approvalStatus'] = mydata['approvalStatus']
+    order_by_id[0]['orderRemarks'] = mydata['orderRemarks']
+
+    return jsonify({'order': order_by_id})
+
+@fff.route('/api/v1/orders/<int:id>', methods=['DELETE'])
+def remove_completed_order(id):
+    """ Function remove_completed_order removes finished order """
+    order_by_id = [order for order in models.orders \
+    if order['orderID'] == id]
+    models.orders.remove(order_by_id[0])
+
+    return jsonify({'orders': models.orders})
+
+
 

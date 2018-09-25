@@ -27,6 +27,10 @@ darksh - Dracula orchid - #2d3436 - footer background
 
 Social media colors
 https://briangardner.com/social-media-colors/
+Faceboook - Hex: #3b5998
+Twitter - Hex: #55acee
+Google+ - Hex: #dc4e41
+Instagram - Hex: #517fa4
 
 */
 
@@ -207,6 +211,7 @@ header {
     list-style: none;
     margin-top: 55px;
 }
+
 
 .main-nav li,
 .user-main-nav li {
@@ -593,7 +598,7 @@ footer p a:hover {
 .userdashboard-title img,
 .admin-title img {
     width: auto;
-    height: 50px;
+    height: 70px;
     vertical-align: middle;
 }
 
@@ -604,7 +609,7 @@ footer p a:hover {
 .imagebox .imgHover {
     position: absolute;
     display: none;
-    left: 1.9px;
+    left: 1.8px;
     top: 0;
 }
 
@@ -624,8 +629,33 @@ footer p a:hover {
 .signin-signup, 
 .userdashboard-notifications {
     float: right;
-    margin-top: 20px;
+    margin-top: 30px;
 }
+
+.top-navbar {
+    list-style: none;
+}
+.top-navbar li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.top-navbar li:nth-child(-n+5) {
+    text-transform: uppercase;
+}
+
+.top-navbar li a {
+    padding: 5px 0;
+}
+
+.top-navbar li a:hover {
+    border-bottom: 2px solid #e67e22;
+}
+
+.top-navbar li:last-of-type {
+    font-size: 75%;
+}
+
 
 /* Sign-in Page - Signin form Section */
 

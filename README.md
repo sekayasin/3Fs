@@ -1,5 +1,5 @@
 # 3Fs - Fast-Food-Fast
-3Fs (Fast-Food-Fast) is a food delivery service app for a restaurant\
+3Fs (Fast-Food-Fast) is a food delivery service app for a restaurant
 
 [![Build Status](https://travis-ci.com/sekayasin/3Fs.svg?branch=dev)](https://travis-ci.com/sekayasin/3Fs)
 [![Coverage Status](https://coveralls.io/repos/github/sekayasin/3Fs/badge.svg?branch=dev)](https://coveralls.io/github/sekayasin/3Fs?branch=dev)
@@ -46,7 +46,7 @@ The table shows the api endpoints
 ##### Installation
 
 ## Andela Uganda Cohort 12
-3Fs project is a Challenge series requirement for **Cohort 12 Andela Uganda** Bootcampers\
+3Fs project is a Challenge project requirement for **Cohort 12 Andela Uganda** Bootcampers
 1. Challenge 1 - Frontend (HTML/CSS) - Fast-Food-Fast Website
 2. Challenge 2 - API Design - Fast-Food-Fast API 
 

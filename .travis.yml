@@ -1,6 +1,9 @@
 language: python
 python:
   - "3.6"
+branches:
+  only:
+  - dev
 env:
   global:
     - CC_TEST_REPORTER_ID=8a2b1e533c378f87c186df7d54b916d614233e6d50963612fbb585337ec1e465

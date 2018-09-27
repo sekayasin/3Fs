@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <title>3Fs - API Version1</title>
+    </head>
+    <body>
+        <header>
+            <h1>Fast-Food-Fast (3Fs) API - Version 1</h1>
+        </header>
+    
+        <div class=container>    
+            <h2>Welcome to 3Fs API documentation home page</h2>
+            <h3>Test the below api endpoints in POSTMAN</h3>
+            <table>
+                <tr>
+                    <th>API EndPoint</th>
+                    <th>User</th>
+                    <th>Functionality</th>
+                </tr>
+                <tr>
+                    <td>GET /api/v1/menu</td>
+                    <td>admin</td>
+                    <td>add new food-item and price on menu available for order on a given day</td>
+                </tr>
+                <tr>
+                    <td>GET /api/v1/client/menu</td>
+                    <td>client</td>
+                    <td>Get the menu of the meals available for order and their respective prices</td>
+                </tr>
+                <tr>
+                    <td>POST /api/v1/orders</td>
+                    <td>Client</td>
+                    <td>Place new order</td>
+                </tr>
+                <tr>
+                    <td>GET /api/v1/orders</td>
+                    <td>admin</td>
+                    <td>Get all the available orders</td>
+                </tr>
+                <tr>
+                    <td>GET /api/v1/orders/orderID</td>
+                    <td>admin</td>
+                    <td>Get a specific order</td>
+                </tr>
+                <tr>
+                    <td>GET /api/v1/client/orders/orderID</td>
+                    <td>client</td>
+                    <td>Client can get his/her specific order to check status</td>
+                </tr>
+                <tr>
+                    <td>PUT /api/v1//orders/orderID</td>
+                    <td>admin</td>
+                    <td>Update status of specific order</td>
+                </tr>
+                <tr>
+                    <td>DELETE /api/v1/orders/orderID</td>
+                    <td>admin</td>
+                    <td>Remove completed order</td>
+                </tr>
+            </table>
+            <p>More information about the 3Fs Project can be found on Github <a href="https://github.com/sekayasin/3Fs/tree/dev">here</a></p>
+        </div><!-- End container -->
+    </body>
+</html>

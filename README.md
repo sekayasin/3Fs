@@ -27,7 +27,7 @@ The table shows the api endpoints
 | --- | --- | --- |
 | GET /api/v1/client/menu | client | The client can check the available menu at 3fs takeaway |
 | POST /api/v1/orders | client | The client can place a new order |
-| GET /api/v1/client/orders/clientUsername | client | The client can get his/her latest orders |
+| POST /api/v1/menu | admin | The admin to add a food-item and its price on the available menu |
 | GET /api/v1/client/orders/orderID | client | The client can get his/her order by orderID |
 | GET /api/v1/orders | admin | The admin can get all the available orders |
 | GET /api/v1/orders/orderID | admin | The admin can get a specific order |
@@ -44,6 +44,43 @@ The table shows the api endpoints
 
 #### 3Fs API
 ##### Installation
+In order to run the api application, follow these steps
+1. Start by cloning the api repo locally to your machine
+```
+$ git clone https://github.com/sekayasin/3Fs.git
+$ cd 3Fs
+```
+2. Project requires that you have python 3 installed. Tested on python 3.6.5
+- Project has been tested on python 3.6.5 in a virtual environement using Virtualenv and Virtualenvwrapper
+- Download and Install python 3.6 or above [here](https://www.python.org/downloads/)
+```
+$ pip install virtualenv
+$ pip install virtualenvwrapper
+```
+- Or You can work with the lightweight virtual environmnets introduced in python3.4
+```
+$ python3 -m venv virtualenvironment_name
+```
+- Activate your virtual environment
+```
+$ source ~/3Fs/virtualenvironment_name/bin/activate
+```
+- Now install the requirements.txt file in 3Fs
+```
+$ pip install -r requirements.txt
+```
+- Set flask environment variable
+- cloned 3Fs has a .flaskenv file... You should be good to go
+- UNIX
+```
+$ export FLASK_APP=run.py
+```
+- Run the app
+```
+flask run
+``` 
+#### Usage
+I have recorded a screencast on how to test the api endpoints on YouTube [here](https://www.youtube.com/watch?v=lGi0FNqr_Ps)
 
 ## Andela Uganda Cohort 12
 3Fs project is a Challenge project requirement for **Cohort 12 Andela Uganda** Bootcampers

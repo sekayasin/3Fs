@@ -51,5 +51,5 @@ def test_orders_available():
     orders = models.Orders()
     orders.add_order('pilawo', 3, '90K UGX', 'sekayasin', '12A Kevina Rd')
     assert len(orders.get_orders()) == 1
-    
 
+    

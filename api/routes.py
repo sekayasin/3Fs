@@ -1,6 +1,21 @@
 from flask import jsonify, request, render_template, url_for
 from api import fff, models, status
 
+
+""" error handler 405, 404, 500 """
+@fff.errorhandler(405)
+def url_not_found(error):
+    return jsonify({'message':'Requested method not allowed'}), status.HTTP_405_METHOD_NOT_ALLOWED
+
+@fff.errorhandler(404)
+def page_not_found(error):
+    return jsonify({'message':'page not found, check the url'}), status.HTTP_404_NOT_FOUND
+
+@fff.errorhandler(500)
+def internal_error(error):
+    return jsonify({'message': 'Internal server error'}), status.HTTP_500_INTERNAL_SERVER_ERROR
+
+
 @fff.route('/')
 def index():
     ''' 

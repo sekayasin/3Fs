@@ -1,8 +1,8 @@
 # 3Fs - Fast-Food-Fast
 3Fs (Fast-Food-Fast) is a food delivery service app for a restaurant
 
-[![Build Status](https://travis-ci.com/sekayasin/3Fs.svg?branch=dev)](https://travis-ci.com/sekayasin/3Fs)
-[![Coverage Status](https://coveralls.io/repos/github/sekayasin/3Fs/badge.svg?branch=dev)](https://coveralls.io/github/sekayasin/3Fs?branch=dev)
+[![Build Status](https://travis-ci.com/sekayasin/3Fs.svg?branch=develop)](https://travis-ci.com/sekayasin/3Fs)
+[![Coverage Status](https://coveralls.io/repos/github/sekayasin/3Fs/badge.svg?branch=develop)](https://coveralls.io/github/sekayasin/3Fs?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/265ca6d8e55d6437cffa/maintainability)](https://codeclimate.com/github/sekayasin/3Fs/maintainability)
 
 ## 3Fs Demo webiste on GitHub Pages

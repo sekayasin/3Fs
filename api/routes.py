@@ -1,4 +1,4 @@
-from flask import jsonify, request, render_template, url_for
+from flask import jsonify, request, render_template, url_for, redirect
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token, get_jwt_identity
 )
@@ -27,12 +27,9 @@ def internal_error(error):
 
 @fff.route('/')
 def index():
-    ''' 
-    This is the home page for our Fast-food-fast API
-    home page which consists of our API Documentation
-    '''
-    return render_template('index.html')
+    pass
 
+    
 @fff.route('/auth/signup', methods=['POST'])
 def signup():
     """ Register a new user """
@@ -89,22 +86,31 @@ def signin():
         return jsonify({"msg": "Missing username parameter"}), status.HTTP_400_BAD_REQUEST
     if not password:
         return jsonify({"msg": "Missing password parameter"}), status.HTTP_400_BAD_REQUEST
-    if username != 'test' or password != 'test':
-        return jsonify({"msg": "Bad username or password"}), status.HTTP_401_UNAUTHORIZED
+    
+    parsejson = request.get_json()
+    username = parsejson['username']
+    password = parsejson['password']
 
-    # Identity can be any data that is json serializable
-    access_token = create_access_token(identity=username)
-    return jsonify(access_token=access_token), status.HTTP_200_OK
+    user = db.check_user_pass(username)
+    if username == user['username']:
+        if password == user["password"]:
+            # Identity can be any data that is json serializable
+            access_token = create_access_token(identity=username)
+            return jsonify(access_token=access_token), status.HTTP_200_OK
+        return jsonify({"msg": "Invalid password"})
+    return jsonify({"msg": "Invalid username"}) 
 
-# Protect a view with jwt_required, which requires a valid access token
-# in the request to access.
-@fff.route('/protected', methods=['GET'])
+
+"""
+Protect a view with jwt_required, which requires a valid access token
+in the request to access.
+"""
+@fff.route('/user', methods=['GET'])
 @jwt_required
 def protected():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
-
 
 
 

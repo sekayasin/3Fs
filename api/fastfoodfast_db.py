@@ -13,7 +13,7 @@ class DatabaseConnection:
             self.db_connection = pg2.connect(
                 "dbname='fastfoodfast_test_db' password='' host='localhost' port='5432' user='sekayasin'")            
             self.db_connection.autocommit = True
-            self.cursor = self.db_connection.cursor()
+            self.cursor = self.db_connection.cursor(cursor_factory=RealDictCursor)
             print("You are connected to fastfoodfast_db")
         except:
             print("Can not onnect to database")
@@ -155,8 +155,6 @@ class DatabaseConnection:
 
         self.cursor.execute(sql,(first_name, last_name, username, password, email, address, tel))
         print("User creation: Success")
-
-        self.db_connection.close()
     
     def staff_sign_up(self, first_name, last_name, username, password, email, address, tel):
         """
@@ -201,85 +199,17 @@ class DatabaseConnection:
 
         self.cursor.execute(sql,(first_name, last_name, username, password, email, address, tel))
         print("Staff creation: Success")
-
-        self.db_connection.close()
     
-    def add_menu(self, dish_name, dish_price, dish_toppings):
+    def check_user_pass(self, username):
         """
-        This is an SQL Query to add a menu option
-        :param str dish_name: name of the dish
-        :param int dish_price: cost of the dish
-        :param str dish_toppings: Addons on the dish
+        This is an SQL Query get a user by username
         """
-        self.dish_name = dish_name
-        self.dish_price = dish_price
-        self.dish_toppings = dish_toppings
+        sql = """ SELECT * from users WHERE username = '{}'""".format(username)
+        self.cursor.execute(sql)
+        if self.cursor.rowcount > 0:
+            get_user_dict = self.cursor.fetchone()
+            return get_user_dict
 
-        sql = """ INSERT INTO menu(
-            dish_name,
-            dish_price,
-            dish_toppings)
-            VALUES('{}', '{}', '{}')""".format(
-                dish_name,
-                dish_price,
-                dish_toppings
-            )
-
-        self.cursor.execute(sql,(dish_name, dish_price, dish_toppings))
-        print("dish creation: Success")
-
-        self.db_connection.close()
-    
-    def place_order(self, order_quantity, total_order_cost):
-        """
-        This is an SQL Query to add a new order
-        :param int user_id: ID of the user who has placed an order
-        :param int dish_id: ID of the meal the customer has ordered 
-        :param int order_quantity: the quantity of the order the customer wants
-        :param int total_order_cost: total order cost = quantityXdish_price in menu table
-        :param str order_status: the status of the order
-        :param datetime: timestamp when the order was placed
-        """
-        self.user_id = 1
-        self.dish_id = 2
-        self.order_quantity = order_quantity
-        self.total_order_cost = total_order_cost
-        self.order_status = "NEW"
-        self.order_timestamp = str(datetime.now())
-
-        sql = """ INSERT INTO orders(
-            user_id,
-            dish_id,
-            order_quantity,
-            total_order_cost,
-            order_status,
-            order_timestamp)
-            VALUES('{}', '{}', '{}', '{}', '{}','{}')""".format(
-                self.user_id, 
-                self.dish_id,
-                self.order_quantity,
-                self.total_order_cost,
-                self.order_status,
-                self.order_timestamp)
-        
-        self.cursor.execute(sql, (order_quantity, total_order_cost))
-        print("order creation: Success")
-
-        self.db_connection.close()
-
-
-
-# db = DatabaseConnection()
-# db.create_all_db_schemas()
-# db.add_a_role("is_admin")
-# db.add_a_role("is_user")
-# db.user_sign_up('Ibra', 'Kawesa', 'kawesa', 'ibra@bootcamp', 'ibra@me.com', '12A Kevina Rd', '+256772062954')
-# db.user_sign_up('Umar', 'Bumalo', 'umsenge', 'umasenge123', 'umasenge@onetouch', '11A Kevina Rd', '+256704062954')
-# db.staff_sign_up("Luqman", "Matovu", "matluq", "matluq123", "matluq@fastfoodfast", "1B Haji Sowedi Rd", "+25670030033")
-# db.staff_sign_up("Mansour", "Kalasa", "kabiri", "kabiri123", "kalasamayanzi@fastfoodfast", "13 Kawempe Mbogo", "+25689822897")
-# db.add_menu("Kikomando", 15, "Nanya mbisi neggi")
-# db.add_menu("Chicken Submarine", 20, "Soda and chips")
-# db.place_order(1,30)
     
 
 

@@ -209,6 +209,41 @@ class DatabaseConnection:
         if self.cursor.rowcount > 0:
             get_user_dict = self.cursor.fetchone()
             return get_user_dict
+    
+    def add_menu(self, dish_name, dish_price, dish_toppings):
+        """
+        This is an SQL Query to add a menu option
+        :param str dish_name: name of the dish
+        :param int dish_price: cost of the dish
+        :param str dish_toppings: Addons on the dish
+        """
+        self.dish_name = dish_name
+        self.dish_price = dish_price
+        self.dish_toppings = dish_toppings
+
+        sql = """ INSERT INTO menu(
+            dish_name,
+            dish_price,
+            dish_toppings)
+            VALUES('{}', '{}', '{}')""".format(
+                dish_name,
+                dish_price,
+                dish_toppings
+            )
+
+        self.cursor.execute(sql,(dish_name, dish_price, dish_toppings))
+        print("dish creation: Success")
+    
+    def get_menu(self):
+        """
+        This is an SQL Query to get the menu items
+        """
+        sql = """ SELECT * from menu"""
+        self.cursor.execute(sql)
+        if self.cursor.rowcount > 0:
+            menu_dict = self.cursor.fetchall()
+            available_menu = [{k: v for k,v in menu_item.items() if k != "dish_id"} for menu_item in menu_dict]
+            return available_menu
 
     
 

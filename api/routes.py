@@ -94,7 +94,7 @@ def signin():
     user = db.check_user_pass(username)
     if username == user['username']:
         if password == user["password"]:
-            # Identity can be any data that is json serializable
+            """ Identity can be any data that is json serializable """ 
             access_token = create_access_token(identity=username)
             return jsonify(access_token=access_token), status.HTTP_200_OK
         return jsonify({"msg": "Invalid password"})
@@ -108,9 +108,40 @@ in the request to access.
 @fff.route('/user', methods=['GET'])
 @jwt_required
 def protected():
-    # Access the identity of the current user with get_jwt_identity
+    """ Access the identity of the current user with get_jwt_identity """
     current_user = get_jwt_identity()
-    return jsonify(logged_in_as=current_user), 200
+    return jsonify(logged_in_as=current_user), status.HTTP_200_OK
+
+""" Admin add menu option """
+@fff.route('/menu', methods=['POST'])
+def add_menu_option():
+    """ Add menu option """
+    dishname = request.json.get('dish_name', None)
+    dishprice = request.json.get('dish_price', None)
+    dishtoppings = request.json.get('dish_toppings', None)
+
+    if not dishname:
+        return jsonify({"msg": "Missing dish_name parameter"}), status.HTTP_400_BAD_REQUEST
+    if not dishprice:
+        return jsonify({"msg": "Missing dish_price parameter"}), status.HTTP_400_BAD_REQUEST
+    if not dishtoppings:
+        return jsonify({"msg": "Missing dish_toppings parameter"}), status.HTTP_400_BAD_REQUEST
+    
+    parsejson = request.get_json()
+    dishname = parsejson['dish_name']
+    dishprice = parsejson['dish_price']
+    dishtoppings = parsejson['dish_toppings']
+    
+    if dishname and dishprice and dishtoppings:
+        db.add_menu(dishname, dishprice, dishtoppings)
+        return jsonify({'msg': '{} has been added on the menu'.format(dishname)}), status.HTTP_201_CREATED
+
+
+""" Get Available menu """
+@fff.route('/menu', methods=['GET'])
+def get_menu():
+    """ Function get_menu returns a list of available menu at 3fs """
+    return jsonify({'menu': db.get_menu()}), status.HTTP_200_OK
 
 
 

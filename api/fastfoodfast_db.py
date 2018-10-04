@@ -109,9 +109,6 @@ class DatabaseConnection:
 
         print("Schema creation: Success")
 
-        """ Close the db_connection """
-        self.db_connection.close()
-
 
     def add_a_role(self, role_name):
         """
@@ -128,8 +125,6 @@ class DatabaseConnection:
         
         self.cursor.execute(sql,(role_name,))
         print("role creation: Success")
-
-        self.db_connection.close()
         
 
     def user_sign_up(self, first_name, last_name, username, password, email, address, tel):
@@ -229,6 +224,7 @@ class DatabaseConnection:
         if self.cursor.rowcount > 0:
             get_user_dict = self.cursor.fetchone()
             return get_user_dict
+        return None
     
     def add_menu(self, dish_name, dish_price, dish_toppings):
         """

@@ -13,6 +13,9 @@ menu = models.Menu()
 order = models.Orders()
 db = fastfoodfast_db.DatabaseConnection()
 
+"""Create databases """
+db.create_all_db_schemas()
+
 """ error handler 405, 404, 500 """
 @fff.errorhandler(405)
 def url_not_found(error):
@@ -95,13 +98,15 @@ def signin():
     password = parsejson['password']
 
     user = db.check_user_pass(username)
-    if username == user['username']:
-        if password == user["password"]:
-            """ Identity can be any data that is json serializable """ 
-            access_token = create_access_token(identity=username)
-            return jsonify(access_token=access_token), status.HTTP_200_OK
-        return jsonify({"msg": "Invalid password"})
-    return jsonify({"msg": "Invalid username"}) 
+    
+    # if username is None:
+    #     return jsonify({"msg": "Invalid username"})
+
+    if username == user['username'] and password == user["password"]:
+        """ Identity can be any data that is json serializable """ 
+        access_token = create_access_token(identity=username)
+        return jsonify(access_token=access_token), status.HTTP_200_OK
+    return jsonify({"msg": "Invalid Username and Password"}) 
 
 
 """
@@ -142,6 +147,7 @@ def add_menu_option():
 
 """ Get Available menu """
 @fff.route('/menu', methods=['GET'])
+@jwt_required
 def get_menu():
     """ Function get_menu returns a list of available menu at 3fs """
     return jsonify({'menu': db.get_menu()}), status.HTTP_200_OK

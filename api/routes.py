@@ -178,4 +178,16 @@ def get_orders():
     ''' Function get_orders returns a list a of all orders '''
     return jsonify({'orders': db.get_all_orders()}), status.HTTP_200_OK
 
+@fff.route('/orders/<int:id>', methods=['PUT'])
+def update_order_status(id):
+    """ Function update_order_status updates the status of the order """
+    order_status = request.json.get('order_status', None)
+
+    if not order_status:
+        return jsonify({"msg": "Missing order_status parameter"}), status.HTTP_400_BAD_REQUEST
+
+    parsejson = request.get_json()
+    order_status = parsejson['order_status']
+    return jsonify({'order': db.update_order_status(id, order_status)}), status.HTTP_201_CREATED
+
 

@@ -244,6 +244,69 @@ class DatabaseConnection:
             menu_dict = self.cursor.fetchall()
             available_menu = [{k: v for k,v in menu_item.items() if k != "dish_id"} for menu_item in menu_dict]
             return available_menu
+    
+    def place_order(self, username, meal, order_quantity, total_order_cost):
+        """
+        This is an SQL Query to add a new order
+        :param int user_id: ID of the user who has placed an order
+        :param int dish_id: ID of the meal the customer has ordered 
+        :param int order_quantity: the quantity of the order the customer wants
+        :param int total_order_cost: total order cost = quantityXdish_price in menu table
+        :param str order_status: the status of the order
+        :param datetime: timestamp when the order was placed
+        """
+
+        userquery = """ SELECT * from users WHERE username = '{}'""".format(username)
+        self.cursor.execute(userquery)
+        if self.cursor.rowcount > 0:
+            get_user_dict = self.cursor.fetchone()
+        else:
+            return "Invalid username"
+        
+        mealquery = """ SELECT * from menu WHERE dish_name = '{}'""".format(meal)
+        self.cursor.execute(mealquery)
+        if self.cursor.rowcount > 0:
+            get_meal_dict = self.cursor.fetchone()
+        else:
+            return "Sorry, That Meal type of meal is not available, check again todays menu"
+        
+
+        self.user_id = get_user_dict['user_id']
+        self.dish_id = get_meal_dict['dish_id']
+        self.order_quantity = order_quantity
+        self.total_order_cost = total_order_cost
+        self.order_status = "NEW"
+        self.order_timestamp = str(datetime.now())
+
+        sql = """ INSERT INTO orders(
+            user_id,
+            dish_id,
+            order_quantity,
+            total_order_cost,
+            order_status,
+            order_timestamp)
+            VALUES('{}', '{}', '{}', '{}', '{}','{}')""".format(
+                self.user_id, 
+                self.dish_id,
+                self.order_quantity,
+                self.total_order_cost,
+                self.order_status,
+                self.order_timestamp)
+        
+        self.cursor.execute(sql, (order_quantity, total_order_cost))
+        return "You\'ve successfully placed an order, Your Request is forwarded to our master chef"
+
+    def get_all_orders(self):
+        """ This is an SQL Query to get all the  orders """
+        get_all_orders_query = """ SELECT order_id, username, email, address,
+        order_quantity, total_order_cost, order_status, order_timestamp FROM users 
+        INNER JOIN orders ON orders.user_id = users.user_id 
+        INNER JOIN menu on orders.dish_id = menu.dish_id """
+
+        self.cursor.execute(get_all_orders_query)
+        if self.cursor.rowcount > 0:
+            all_orders = self.cursor.fetchall()
+            return all_orders
 
     
 

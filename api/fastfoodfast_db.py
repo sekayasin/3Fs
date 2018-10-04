@@ -6,17 +6,37 @@ class DatabaseConnection:
     """
     DatabaseConnection Class 
     - Handles the connection to a PostgreSQL database instance.
+    Local connection
+    "dbname='fastfoodfast_test_db' 
+    password='' 
+    host='localhost' 
+    port='5432' 
+    user='sekayasin'
+
+    Heroku rotates credentials periodically and 
+    updates applications where this database is attached.
+
+    Host ec2-54-225-68-133.compute-1.amazonaws.com
+    Database d3h5fquda8ms9u
+    User gjgjeoxmwaoipq
+    Port 5432
+    Password 403fa6bb565ae3bc600488f58fd1e5d4acaef14d92bc7749065ed1fc2f89aca6
     """
 
     def __init__(self):
         try:
             self.db_connection = pg2.connect(
-                "dbname='fastfoodfast_test_db' password='' host='localhost' port='5432' user='sekayasin'")            
+                "dbname='d3h5fquda8ms9u' \
+                password='403fa6bb565ae3bc600488f58fd1e5d4acaef14d92bc7749065ed1fc2f89aca6' \
+                host='ec2-54-225-68-133.compute-1.amazonaws.com' \
+                port='5432' \
+                user='gjgjeoxmwaoipq'\
+                ")            
             self.db_connection.autocommit = True
             self.cursor = self.db_connection.cursor(cursor_factory=RealDictCursor)
-            print("You are connected to fastfoodfast_db")
+            print("Database Connection: Success")
         except:
-            print("Can not onnect to database")
+            print("Can not onnect to any database")
     
     """
     Setting tables for our fastfoodfast_db

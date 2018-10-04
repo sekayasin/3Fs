@@ -2,6 +2,7 @@ from flask import jsonify, request, render_template, url_for, redirect
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token, get_jwt_identity
 )
+from flasgger import swag_from
 from api import fff, models, status, fastfoodfast_db
 
 """ Setup the Flask-JWT-Extended extension """
@@ -27,10 +28,12 @@ def internal_error(error):
 
 @fff.route('/')
 def index():
-    pass
+    """ Redirect this route to swagger apidocs """
+    return redirect('/apidocs')
 
     
 @fff.route('/auth/signup', methods=['POST'])
+@swag_from('./templates/signup.yml')
 def signup():
     """ Register a new user """
     

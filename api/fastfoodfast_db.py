@@ -308,6 +308,22 @@ class DatabaseConnection:
             all_orders = self.cursor.fetchall()
             return all_orders
 
+    def update_order_status(self, order_id, order_status):
+        """ This is an SQL Query to update the  status """
+        
+        self.order_id = order_id
+        self.order_status = order_status
+
+        query_order = """ SELECT * FROM orders WHERE order_id = '{}'""".format(self.order_id)
+        self.cursor.execute(query_order)
+
+        if self.cursor.rowcount > 0:
+            update_order = """ UPDATE orders SET order_status = '{}' WHERE order_id = '{}'""".format(self.order_status, self.order_id)
+            self.cursor.execute(update_order)
+            return "Order Status has been changed to {}".format(self.order_status)
+        return "Kindly confirm your order"
+
+
     
 
 

@@ -143,5 +143,36 @@ def get_menu():
     """ Function get_menu returns a list of available menu at 3fs """
     return jsonify({'menu': db.get_menu()}), status.HTTP_200_OK
 
+""" Place an order """
+@fff.route('/users/orders', methods=['POST'])
+def place_order():
+    """ Function place_order helps the client to place new order """
+    username = request.json.get('username', None)
+    meal = request.json.get('dish_name', None)
+    order_quantity = request.json.get('order_quantity', None)
+    total_order_cost = request.json.get('total_order_cost', None)
+
+    if not username:
+        return jsonify({"msg": "Missing username parameter"}), status.HTTP_400_BAD_REQUEST
+    if not meal:
+        return jsonify({"msg": "Missing dish_name parameter"}), status.HTTP_400_BAD_REQUEST
+    if not order_quantity:
+        return jsonify({"msg": "Missing order_quantity parameter"}), status.HTTP_400_BAD_REQUEST
+    if not total_order_cost:
+        return jsonify({"msg": "Missing total_order_cost parameter"}), status.HTTP_400_BAD_REQUEST
+
+    parsejson = request.get_json()
+    username = parsejson['username']
+    meal = parsejson['dish_name']
+    order_quantity = parsejson['order_quantity']
+    total_order_cost = parsejson['total_order_cost']
+    
+    return jsonify({'message': db.place_order(username, meal, order_quantity, total_order_cost)}), status.HTTP_201_CREATED
+
+
+@fff.route('/orders', methods=['GET'])
+def get_orders():
+    ''' Function get_orders returns a list a of all orders '''
+    return jsonify({'orders': db.get_all_orders()}), status.HTTP_200_OK
 
 

@@ -13,15 +13,18 @@
 ## Project Progress managed with PivotalTracker 
 You can check on the project progress board <a href="https://www.pivotaltracker.com/n/projects/2195804">here</a>
 
-## 3Fs API
-3Fs API is hosted on Heroku <a href="https://sekayasin-3fs-api.herokuapp.com/">here</a>
+## 3Fs API v1
+3Fs API v1 is hosted on Heroku <a href="https://sekayasin-3fs-api.herokuapp.com/">here</a>
+
+## 3Fs API v2
+3Fs API v2 is hosted on Heroku [here](https://id.heroku.com/login)
 
 The 3Fs API will serve two parties, the 3fs client(customer) and the administrator (admin).\
 The client will use the api to place an order, query his/her latest orders, and also query a specific order.\
 The Admin will use the api to update client's status order, update menu available at 3fs, query available orders,\
 specfic order, remove completed orders.
  
-The table shows the api endpoints
+The table below shows the 3Fs api v1 endpoints
 
 | Endpoint | User | Functionality |
 | --- | --- | --- |
@@ -33,6 +36,20 @@ The table shows the api endpoints
 | GET /api/v1/orders/orderID | admin | The admin can get a specific order |
 | PUT /api/v1/orders/orderID | admin | The admin can update status of a specific order |
 | DELETE /api/v1/orders/orderID | admin | The admin can remove a completed order |
+
+The table shows the 3Fs api v2 endpoints
+
+| Endpoint | User | Functionality |
+| --- | --- | --- |
+| POST /auth/signup | users | Register a user |
+| post /auth/login | users | Login a user |
+| POST /menu | Admin | Only the Admin to add a meal option to the menu |
+| GET /menu | User | Users should be able to get the available menu |
+| POST /users/orders | user | Place an order for food |
+| GET /orders | Admin | Only Admin user should be able to get all orders |
+| GET /users/orders | User | Get the order history for a specific user |
+| GET /orders/OrderID | Admin | The admin to get a specific order |
+| PUT /orders/OrderID | Admin | The admin to update the status of an order |
    
 ## Project Overview
 ### Technologies Used
@@ -42,7 +59,7 @@ The table shows the api endpoints
 3. ionicons have been used to provide icon fonts, <a href="https://ionicons.com/">read more</a> about ionicons.
 4. GoogleFonts have been used to make the typography beautiful and great, <a href="https://fonts.google.com/">read more</a> about GoogleFonts. 
 
-#### 3Fs API
+#### 3Fs API v1
 ##### Installation
 In order to run the api application, follow these steps
 1. Start by cloning the api repo locally to your machine
@@ -79,13 +96,16 @@ $ export FLASK_APP=run.py
 ```
 flask run
 ``` 
-#### Usage
-I have recorded a screencast on how to test the api endpoints on YouTube [here](https://www.youtube.com/watch?v=lGi0FNqr_Ps)
+##### Usage
+For api v1 , I have recorded a screencast on how to test the api endpoints on YouTube [here](https://www.youtube.com/watch?v=lGi0FNqr_Ps)
+
+#### 3Fs API v2
 
 ## Andela Uganda Cohort 12
 3Fs project is a Challenge project requirement for **Cohort 12 Andela Uganda** Bootcampers
 1. Challenge 1 - Frontend (HTML/CSS) - Fast-Food-Fast Website
-2. Challenge 2 - API Design - Fast-Food-Fast API 
+2. Challenge 2 - API Design - Fast-Food-Fast API v1 - Data is persisted to a Data-structure
+3. Challenge 3 - API Design - Fast-Food-Fast API v2 - Add more API endpoints and Data is persisted to a Postgres DB
 
 ### Contact information for thatGuy! our Awesome Developer!
 - Name: **Sekabira Yasin** , call me *sekayasin*

@@ -1,0 +1,38 @@
+3Fs apiv2 place order
+---
+tags:
+ - A User to place an order
+parameters:
+  - name: Authorization
+    in: header
+    type: string
+    description: JWT token authorization
+    required: true
+    example: "Bearer" 
+  - in: body
+    name: body
+    required: true
+    type: string
+    description: This route is used to place a new order.
+security:
+  - JWT:
+      name: Authorization
+      in: header
+      type: string
+      description: JWT token authorization
+      required: true
+    example: "Bearer" 
+responses:
+  201:
+    description: Successful. Order has been forwarded to the chief.
+    schema:
+      id: place_order
+      properties:
+        dish_name:
+          type: string
+        order_quantity:
+          type: int
+        total_order_cost:
+          type: string
+  400:
+    description: Empty dish_name, order_quantity and total_order_cost field.

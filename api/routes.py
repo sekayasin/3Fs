@@ -108,20 +108,10 @@ def signin():
         return jsonify({"msg": "Invalid Username"}) 
 
 
-"""
-Protect a view with jwt_required, which requires a valid access token
-in the request to access.
-"""
-@fff.route('/user', methods=['GET'])
-@jwt_required
-def protected():
-    """ Access the identity of the current user with get_jwt_identity """
-    current_user = get_jwt_identity()
-    return jsonify(logged_in_as=current_user), status.HTTP_200_OK
-
 """ Admin add menu option """
 @fff.route('/menu', methods=['POST'])
 @jwt_required
+@swag_from('./templates/add_menu.yml')
 def add_menu_option():
     """ Add menu option """
     dishname = request.json.get('dish_name', None)
@@ -147,21 +137,23 @@ def add_menu_option():
 
 """ Get Available menu """
 @fff.route('/menu', methods=['GET'])
+@swag_from('./templates/get_menu.yml')
 def get_menu():
     """ Function get_menu returns a list of available menu at 3fs """
     return jsonify({'menu': db.get_menu()}), status.HTTP_200_OK
 
 """ Place an order """
 @fff.route('/users/orders', methods=['POST'])
+@jwt_required
+@swag_from('./templates/place_order.yml')
 def place_order():
     """ Function place_order helps the client to place new order """
-    username = request.json.get('username', None)
+    current_user = get_jwt_identity()
+    username = current_user
     meal = request.json.get('dish_name', None)
     order_quantity = request.json.get('order_quantity', None)
     total_order_cost = request.json.get('total_order_cost', None)
 
-    if not username:
-        return jsonify({"msg": "Missing username parameter"}), status.HTTP_400_BAD_REQUEST
     if not meal:
         return jsonify({"msg": "Missing dish_name parameter"}), status.HTTP_400_BAD_REQUEST
     if not order_quantity:
@@ -170,7 +162,6 @@ def place_order():
         return jsonify({"msg": "Missing total_order_cost parameter"}), status.HTTP_400_BAD_REQUEST
 
     parsejson = request.get_json()
-    username = parsejson['username']
     meal = parsejson['dish_name']
     order_quantity = parsejson['order_quantity']
     total_order_cost = parsejson['total_order_cost']
@@ -180,6 +171,7 @@ def place_order():
 
 @fff.route('/orders', methods=['GET'])
 @jwt_required
+@swag_from('./templates/get_all_order.yml')
 def get_orders():
     ''' Function get_orders returns a list a of all orders '''
     return jsonify({'orders': db.get_all_orders()}), status.HTTP_200_OK
@@ -187,6 +179,7 @@ def get_orders():
 
 @fff.route('/orders/<int:id>', methods=['GET'])
 @jwt_required
+@swag_from('./templates/get_order_by_id.yml')
 def get_order_by_id(id):
     """ Function get_order_by_id returns a specific order """
     return jsonify({'order': db.get_order_by_id(id)}), status.HTTP_200_OK
@@ -194,6 +187,7 @@ def get_order_by_id(id):
 
 @fff.route('/orders/<int:id>', methods=['PUT'])
 @jwt_required
+@swag_from('./templates/update_order.yml')
 def update_order_status(id):
     """ Function update_order_status updates the status of the order """
     order_status = request.json.get('order_status', None)

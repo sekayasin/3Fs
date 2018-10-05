@@ -17,7 +17,7 @@ You can check on the project progress board <a href="https://www.pivotaltracker.
 3Fs API v1 is hosted on Heroku <a href="https://sekayasin-3fs-api.herokuapp.com/">here</a>
 
 ## 3Fs API v2
-3Fs API v2 is hosted on Heroku [here](https://id.heroku.com/login)
+3Fs API v2 is hosted on Heroku [here](https://sekayasin-3fs-apiv2.herokuapp.com)
 
 The 3Fs API will serve two parties, the 3fs client(customer) and the administrator (admin).\
 The client will use the api to place an order, query his/her latest orders, and also query a specific order.\

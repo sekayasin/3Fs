@@ -3,14 +3,12 @@ from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token, get_jwt_identity
 )
 from flasgger import swag_from
-from api import fff, models, status, fastfoodfast_db
+from api import fff, status, fastfoodfast_db
 
 """ Setup the Flask-JWT-Extended extension """
 fff.config['JWT_SECRET_KEY'] = 'super-secret'
 jwt = JWTManager(fff)
 
-menu = models.Menu()
-order = models.Orders()
 db = fastfoodfast_db.DatabaseConnection()
 
 """Create databases """
@@ -45,7 +43,7 @@ def signup():
     username = request.json.get('username', None)
     password = request.json.get('password', None)
     email = request.json.get('email', None)
-    address = request.json.get('email', None)
+    address = request.json.get('address', None)
     tel = request.json.get('tel', None)
 
     if not firstname:
@@ -84,6 +82,7 @@ function is used to actually generate the token, and you can return
 it to the caller however you choose
 """
 @fff.route('/auth/login', methods=['POST'])
+@swag_from('./templates/signin.yml')
 def signin():
     username = request.json.get('username', None)
     password = request.json.get('password', None)
@@ -98,15 +97,15 @@ def signin():
     password = parsejson['password']
 
     user = db.check_user_pass(username)
-    
-    # if username is None:
-    #     return jsonify({"msg": "Invalid username"})
-
-    if username == user['username'] and password == user["password"]:
-        """ Identity can be any data that is json serializable """ 
-        access_token = create_access_token(identity=username)
-        return jsonify(access_token=access_token), status.HTTP_200_OK
-    return jsonify({"msg": "Invalid Username and Password"}) 
+    try:
+        if username == user['username']:
+            if password == user["password"]:
+                """ Identity can be any data that is json serializable """ 
+                access_token = create_access_token(identity=username)
+                return jsonify(access_token=access_token), status.HTTP_200_OK
+            return jsonify({"msg": "Invalid Password"})
+    except TypeError:
+        return jsonify({"msg": "Invalid Username"}) 
 
 
 """
@@ -122,6 +121,7 @@ def protected():
 
 """ Admin add menu option """
 @fff.route('/menu', methods=['POST'])
+@jwt_required
 def add_menu_option():
     """ Add menu option """
     dishname = request.json.get('dish_name', None)
@@ -147,7 +147,6 @@ def add_menu_option():
 
 """ Get Available menu """
 @fff.route('/menu', methods=['GET'])
-@jwt_required
 def get_menu():
     """ Function get_menu returns a list of available menu at 3fs """
     return jsonify({'menu': db.get_menu()}), status.HTTP_200_OK
@@ -180,11 +179,21 @@ def place_order():
 
 
 @fff.route('/orders', methods=['GET'])
+@jwt_required
 def get_orders():
     ''' Function get_orders returns a list a of all orders '''
     return jsonify({'orders': db.get_all_orders()}), status.HTTP_200_OK
 
+
+@fff.route('/orders/<int:id>', methods=['GET'])
+@jwt_required
+def get_order_by_id(id):
+    """ Function get_order_by_id returns a specific order """
+    return jsonify({'order': db.get_order_by_id(id)}), status.HTTP_200_OK
+
+
 @fff.route('/orders/<int:id>', methods=['PUT'])
+@jwt_required
 def update_order_status(id):
     """ Function update_order_status updates the status of the order """
     order_status = request.json.get('order_status', None)
@@ -197,3 +206,59 @@ def update_order_status(id):
     return jsonify({'order': db.update_order_status(id, order_status)}), status.HTTP_201_CREATED
 
 
+@fff.route('/roles', methods=['POST'])
+def add_role():
+    """ Add roles is_admin and is_user """
+    rolename = request.json.get('role_name', None)
+
+    if not rolename:
+        return jsonify({"msg": "Missing role_name parameter"}), status.HTTP_400_BAD_REQUEST
+    
+    parsejson = request.get_json()
+    rolename = parsejson['role_name']
+
+    if rolename:
+        db.add_a_role(rolename)
+        return jsonify({"msg": "role created"})
+
+
+@fff.route('/admin/signup', methods=['POST'])
+def admin_signup():
+    """ Register a new admin """
+    
+    firstname = request.json.get('first_name', None)
+    lastname = request.json.get('last_name', None)
+    username = request.json.get('username', None)
+    password = request.json.get('password', None)
+    email = request.json.get('email', None)
+    address = request.json.get('address', None)
+    tel = request.json.get('tel', None)
+
+    if not firstname:
+        return jsonify({"msg": "Missing first_name parameter"}), status.HTTP_400_BAD_REQUEST
+    if not lastname:
+        return jsonify({"msg": "Missing last_name parameter"}), status.HTTP_400_BAD_REQUEST
+    if not username:
+        return jsonify({"msg": "Missing username parameter"}), status.HTTP_400_BAD_REQUEST
+    if not password:
+        return jsonify({"msg": "Missing password parameter"}), status.HTTP_400_BAD_REQUEST
+    if not email:
+        return jsonify({"msg": "Missing email parameter"}), status.HTTP_400_BAD_REQUEST
+    if not address:
+        return jsonify({"msg": "Missing address parameter"}), status.HTTP_400_BAD_REQUEST
+    if not tel:
+        return jsonify({"msg": "Missing tel parameter"}), status.HTTP_400_BAD_REQUEST 
+
+    parsejson = request.get_json()
+    firstname = parsejson['first_name']
+    lastname = parsejson['last_name']
+    username = parsejson['username']
+    password = parsejson['password']
+    email = parsejson['email']
+    address = parsejson['address']
+    tel = parsejson['tel']
+    if firstname and lastname and username and password and password and email and address and tel:
+        db.staff_sign_up(firstname, lastname, username, password, email, address, tel)
+        return jsonify({
+            'message': 'Hi {}!, You have successful created an admin account'.format(username)
+            }), status.HTTP_200_OK

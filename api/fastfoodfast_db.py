@@ -120,7 +120,7 @@ class DatabaseConnection:
         sql = """ INSERT INTO roles(
             role_name)
             VALUES('{}')""".format(
-                role_name 
+                self.role_name 
             )
         
         self.cursor.execute(sql,(role_name,))
@@ -323,6 +323,23 @@ class DatabaseConnection:
         if self.cursor.rowcount > 0:
             all_orders = self.cursor.fetchall()
             return all_orders
+    
+    def get_order_by_id(self, order_id):
+        """ This is an SQL Query to get a specific order """
+        
+        self.order_id = order_id
+
+        get_order = """ SELECT order_id, username, email, address,
+        order_quantity, total_order_cost, order_status, order_timestamp FROM users 
+        INNER JOIN orders ON orders.user_id = users.user_id 
+        INNER JOIN menu on orders.dish_id = menu.dish_id WHERE order_id = '{}'""".format(self.order_id)
+
+        self.cursor.execute(get_order)
+        if self.cursor.rowcount > 0:
+            order = self.cursor.fetchone()
+            return order
+        return "Invalid order ID"
+
 
     def update_order_status(self, order_id, order_status):
         """ This is an SQL Query to update the  status """
@@ -337,10 +354,10 @@ class DatabaseConnection:
             update_order = """ UPDATE orders SET order_status = '{}' WHERE order_id = '{}'""".format(self.order_status, self.order_id)
             self.cursor.execute(update_order)
             return "Order Status has been changed to {}".format(self.order_status)
-        return "Kindly confirm your order"
+        return "OrderID {} Unknown,  Kindly confirm the order ID you wish to update".format(self.order_id)
 
 
-    
+
 
 
 

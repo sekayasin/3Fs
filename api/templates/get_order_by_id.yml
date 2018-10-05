@@ -1,0 +1,24 @@
+3Fs apiv2 Get Specific Order
+---
+tags:
+ - User GET specific Order by Id
+parameters:
+  - name: Authorization
+    in: header
+    type: string
+    description: JWT token authorization
+    required: true
+    example: "Bearer" 
+security:
+  - JWT:
+      name: Authorization
+      in: header
+      type: string
+      description: JWT token authorization
+      required: true
+    example: "Bearer" 
+responses:
+  200:
+    description: Successful. Get a specific Order.
+    schema:
+      id: get_order_by_id

@@ -1,0 +1,24 @@
+3Fs apiv2 Get Orders
+---
+tags:
+ - User GET orders
+parameters:
+  - name: Authorization
+    in: header
+    type: string
+    description: JWT token authorization
+    required: true
+    example: "Bearer" 
+security:
+  - JWT:
+      name: Authorization
+      in: header
+      type: string
+      description: JWT token authorization
+      required: true
+    example: "Bearer" 
+responses:
+  200:
+    description: Successful. All orders will be displayed.
+    schema:
+      id: get_all_order

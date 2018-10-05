@@ -1,0 +1,9 @@
+3Fs apiv2 Get Menu
+---
+tags:
+ - User GET Menu 
+responses:
+  200:
+    description: Successful. A Menu will be displayed.
+    schema:
+      id: get_order_id

@@ -1,7 +1,7 @@
 import pytest
 from datetime import datetime
 from flask import Response, json
-from api import fff, routes, models, status
+from api import fff, routes, status
 
 
 def test_index():

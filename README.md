@@ -50,6 +50,7 @@ The table shows the 3Fs api v2 endpoints
 | GET /users/orders | User | Get the order history for a specific user |
 | GET /orders/OrderID | Admin | The admin to get a specific order |
 | PUT /orders/OrderID | Admin | The admin to update the status of an order |
+| DELETE /orders/OrderID | Admin | The admin to remove a completed order |
    
 ## Project Overview
 ### Technologies Used

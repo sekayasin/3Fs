@@ -1,0 +1,24 @@
+3Fs apiv2 Get User Order History
+---
+tags:
+ - User GET User Order History
+parameters:
+  - name: Authorization
+    in: header
+    type: string
+    description: JWT token authorization
+    required: true
+    example: "Bearer" 
+security:
+  - JWT:
+      name: Authorization
+      in: header
+      type: string
+      description: JWT token authorization
+      required: true
+    example: "Bearer" 
+responses:
+  200:
+    description: Successful. Get a user order history.
+    schema:
+      id: get_order_history_by_username

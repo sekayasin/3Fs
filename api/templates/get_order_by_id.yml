@@ -2,23 +2,38 @@
 ---
 tags:
  - User GET specific Order by Id
+paths:
+ /orders/{id}:
+get:
+ summary: Get a user specfic order by ID.
 parameters:
+  - name: id
+    in: path
+    type: integer
+    format: int64
+    required: true
+    description: Numeric ID of the order to get.
   - name: Authorization
     in: header
     type: string
     description: JWT token authorization
     required: true
-    example: "Bearer" 
+    example: "Bearer <Token>" 
 security:
   - JWT:
       name: Authorization
       in: header
-      type: string
-      description: JWT token authorization
+      type: apiKey
+      description: JWT token authorization - pass in token ie Bearer <Token>
       required: true
-    example: "Bearer" 
+      schema: bearer
+      bearerFormat: JWT 
 responses:
   200:
     description: Successful. Get a specific Order.
     schema:
       id: get_order_by_id
+  401:
+    description: Unauthorized Access
+  404:
+    description: order not found

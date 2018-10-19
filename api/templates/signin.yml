@@ -12,7 +12,7 @@ responses:
   200:
     description: Successful login. JWT token generated.
     schema:
-      id: user_id
+      id: username
       properties:
         username:
           type: string

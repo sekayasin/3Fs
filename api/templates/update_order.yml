@@ -2,13 +2,23 @@
 ---
 tags:
  - Update Order Status
+paths:
+ /orders/{id}:
+put:
+ summary: update order status.
 parameters:
   - name: Authorization
     in: header
     type: string
     description: JWT token authorization
     required: true
-    example: "Bearer" 
+    example: "Bearer <Token>"
+  - name: id
+    in: path
+    type: integer
+    format: int64
+    required: true
+    description: Numeric ID of the order to get.  
   - in: body
     name: body
     required: true
@@ -18,13 +28,13 @@ security:
   - JWT:
       name: Authorization
       in: header
-      type: string
-      description: JWT token authorization
-      required: true
-    example: "Bearer" 
+      type: apiKey
+      description: JWT token authorization - pass in token ie Bearer <Token>
+      schema: bearer
+      bearerFormat: JWT 
 responses:
   201:
-    description: Successful. An Order is updated to either (Processing, Cancelled, Completed)
+    description: Successful. An Order is updated to either (Processing, Cancelled, Completed) from default (NEW)
     schema:
       id: update_order
       properties:
@@ -32,3 +42,7 @@ responses:
           type: string
   400:
     description: Empty order_status field.
+  401:
+    description: Unauthorized Access
+  404:
+    description: order not found 

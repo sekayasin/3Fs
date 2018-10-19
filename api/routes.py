@@ -244,7 +244,6 @@ def update_order_status(id):
     return jsonify({'msg': 'Admin Access only'}), status.HTTP_401_UNAUTHORIZED
     
 
-
 @fff.route('/orders/<int:id>', methods=['DELETE'])
 @jwt_required
 @swag_from('./templates/delete_order.yml')

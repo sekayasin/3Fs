@@ -26,11 +26,11 @@ class DatabaseConnection:
     def __init__(self):
         try:
             self.db_connection = pg2.connect(
-                "dbname='d3h5fquda8ms9u' \
-                password='403fa6bb565ae3bc600488f58fd1e5d4acaef14d92bc7749065ed1fc2f89aca6' \
-                host='ec2-54-225-68-133.compute-1.amazonaws.com' \
+                "dbname='fastfoodfast_test_db' \
+                password='' \
+                host='localhost' \
                 port='5432' \
-                user='gjgjeoxmwaoipq'\
+                user='sekayasin'\
                 ")            
             self.db_connection.autocommit = True
             self.cursor = self.db_connection.cursor(cursor_factory=RealDictCursor)
@@ -315,7 +315,7 @@ class DatabaseConnection:
     def get_all_orders(self):
         """ This is an SQL Query to get all the  orders """
         get_all_orders_query = """ SELECT order_id, username, email, address,
-        order_quantity, total_order_cost, order_status, order_timestamp FROM users 
+        dish_name, order_quantity, total_order_cost, order_status, order_timestamp FROM users 
         INNER JOIN orders ON orders.user_id = users.user_id 
         INNER JOIN menu on orders.dish_id = menu.dish_id """
 
@@ -330,7 +330,7 @@ class DatabaseConnection:
         self.order_id = order_id
 
         get_order = """ SELECT order_id, username, email, address,
-        order_quantity, total_order_cost, order_status, order_timestamp FROM users 
+        dish_name, order_quantity, total_order_cost, order_status, order_timestamp FROM users 
         INNER JOIN orders ON orders.user_id = users.user_id 
         INNER JOIN menu on orders.dish_id = menu.dish_id WHERE order_id = '{}'""".format(self.order_id)
 
@@ -339,6 +339,21 @@ class DatabaseConnection:
             order = self.cursor.fetchone()
             return order
         return "Invalid order ID"
+    
+    def get_user_specific_orders_by_username(self, username):
+        """ This is an SQL Query to get a user specific order """
+
+        self.username = username
+
+        get_user_specific_orders = """ SELECT order_id, username, email, address,
+        dish_name, order_quantity, total_order_cost, order_status, order_timestamp FROM users 
+        INNER JOIN orders ON orders.user_id = users.user_id 
+        INNER JOIN menu on orders.dish_id = menu.dish_id WHERE username = '{}'""".format(self.username)
+
+        self.cursor.execute(get_user_specific_orders)
+        if self.cursor.rowcount > 0:
+            user_orders = self.cursor.fetchall()
+            return user_orders 
 
 
     def update_order_status(self, order_id, order_status):
@@ -355,6 +370,21 @@ class DatabaseConnection:
             self.cursor.execute(update_order)
             return "Order Status has been changed to {}".format(self.order_status)
         return "OrderID {} Unknown,  Kindly confirm the order ID you wish to update".format(self.order_id)
+
+    
+    def remove_completed_order(self, order_id):
+        """ This is an SQL Query to delete an order marked complete """
+
+        self.order_id = order_id
+
+        query_order = """ SELECT * FROM orders WHERE order_id = '{}'""".format(self.order_id)
+        self.cursor.execute(query_order)
+
+        if self.cursor.rowcount > 0:
+            delete_order = """ DELETE FROM orders WHERE order_id = '{}'""".format(self.order_id)
+            self.cursor.execute(delete_order)
+            return "Order {} has been Marked Complete, Done, Removed, and cannot be traced back".format(self.order_id)
+        return "OrderID {} Unknown, Kindly confirm the order ID you wish to Mark Complete and Remove".format(self.order_id)  
 
 
 

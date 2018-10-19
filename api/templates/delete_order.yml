@@ -1,0 +1,36 @@
+3Fs apiv2 Delete a completed Order
+---
+tags:
+ - Delete an Order
+paths:
+ /orders/{id}:
+delete:
+ summary: update order status.
+parameters:
+  - name: Authorization
+    in: header
+    type: string
+    description: JWT token authorization
+    required: true
+    example: "Bearer <Token>"
+  - name: id
+    in: path
+    type: integer
+    format: int64
+    required: true
+    description: Numeric ID of the order to get.
+security:
+  - JWT:
+      name: Authorization
+      in: header
+      type: apiKey
+      description: JWT token authorization - pass in token ie Bearer <Token>
+      schema: bearer
+      bearerFormat: JWT 
+responses:
+  200:
+    description: Successful. An Order is when is deleted
+    schema:
+      id: delete_order
+  401:
+    description: Unauthorized Access - Admin Access only.

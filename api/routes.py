@@ -73,7 +73,7 @@ def signup():
         db.user_sign_up(firstname, lastname, username, password, email, address, tel)
         return jsonify({
             'message': 'Hi {}!, You have successful created an account on fast-food-fast'.format(username)
-            }), status.HTTP_200_OK
+            }), status.HTTP_201_CREATED
     
 
 """
@@ -114,25 +114,30 @@ def signin():
 @swag_from('./templates/add_menu.yml')
 def add_menu_option():
     """ Add menu option """
-    dishname = request.json.get('dish_name', None)
-    dishprice = request.json.get('dish_price', None)
-    dishtoppings = request.json.get('dish_toppings', None)
+    current_user = get_jwt_identity()
+    username = current_user
+    admin_user = db.check_user_pass(username)
+    if admin_user['role_id'] == 1:
+        dishname = request.json.get('dish_name', None)
+        dishprice = request.json.get('dish_price', None)
+        dishtoppings = request.json.get('dish_toppings', None)
 
-    if not dishname:
-        return jsonify({"msg": "Missing dish_name parameter"}), status.HTTP_400_BAD_REQUEST
-    if not dishprice:
-        return jsonify({"msg": "Missing dish_price parameter"}), status.HTTP_400_BAD_REQUEST
-    if not dishtoppings:
-        return jsonify({"msg": "Missing dish_toppings parameter"}), status.HTTP_400_BAD_REQUEST
-    
-    parsejson = request.get_json()
-    dishname = parsejson['dish_name']
-    dishprice = parsejson['dish_price']
-    dishtoppings = parsejson['dish_toppings']
-    
-    if dishname and dishprice and dishtoppings:
-        db.add_menu(dishname, dishprice, dishtoppings)
-        return jsonify({'msg': '{} has been added on the menu'.format(dishname)}), status.HTTP_201_CREATED
+        if not dishname:
+            return jsonify({"msg": "Missing dish_name parameter"}), status.HTTP_400_BAD_REQUEST
+        if not dishprice:
+            return jsonify({"msg": "Missing dish_price parameter"}), status.HTTP_400_BAD_REQUEST
+        if not dishtoppings:
+            return jsonify({"msg": "Missing dish_toppings parameter"}), status.HTTP_400_BAD_REQUEST
+        
+        parsejson = request.get_json()
+        dishname = parsejson['dish_name']
+        dishprice = parsejson['dish_price']
+        dishtoppings = parsejson['dish_toppings']
+        
+        if dishname and dishprice and dishtoppings:
+            db.add_menu(dishname, dishprice, dishtoppings)
+            return jsonify({'msg': '{} has been added on the menu'.format(dishname)}), status.HTTP_201_CREATED
+    return jsonify({'msg': 'Admin Access only'}), status.HTTP_401_UNAUTHORIZED
 
 
 """ Get Available menu """
@@ -150,23 +155,44 @@ def place_order():
     """ Function place_order helps the client to place new order """
     current_user = get_jwt_identity()
     username = current_user
-    meal = request.json.get('dish_name', None)
-    order_quantity = request.json.get('order_quantity', None)
-    total_order_cost = request.json.get('total_order_cost', None)
 
-    if not meal:
-        return jsonify({"msg": "Missing dish_name parameter"}), status.HTTP_400_BAD_REQUEST
-    if not order_quantity:
-        return jsonify({"msg": "Missing order_quantity parameter"}), status.HTTP_400_BAD_REQUEST
-    if not total_order_cost:
-        return jsonify({"msg": "Missing total_order_cost parameter"}), status.HTTP_400_BAD_REQUEST
+    user_access = db.check_user_pass(username)
 
-    parsejson = request.get_json()
-    meal = parsejson['dish_name']
-    order_quantity = parsejson['order_quantity']
-    total_order_cost = parsejson['total_order_cost']
-    
-    return jsonify({'message': db.place_order(username, meal, order_quantity, total_order_cost)}), status.HTTP_201_CREATED
+    if user_access['role_id'] == 2:
+        meal = request.json.get('dish_name', None)
+        order_quantity = request.json.get('order_quantity', None)
+        total_order_cost = request.json.get('total_order_cost', None)
+
+        if not meal:
+            return jsonify({"msg": "Missing dish_name parameter"}), status.HTTP_400_BAD_REQUEST
+        if not order_quantity:
+            return jsonify({"msg": "Missing order_quantity parameter"}), status.HTTP_400_BAD_REQUEST
+        if not total_order_cost:
+            return jsonify({"msg": "Missing total_order_cost parameter"}), status.HTTP_400_BAD_REQUEST
+
+        parsejson = request.get_json()
+        meal = parsejson['dish_name']
+        order_quantity = parsejson['order_quantity']
+        total_order_cost = parsejson['total_order_cost']
+        
+        return jsonify({'message': db.place_order(username, meal, order_quantity, total_order_cost)}), status.HTTP_201_CREATED
+    return jsonify({'msg': 'Kindly create a user account and place again your order'}), status.HTTP_401_UNAUTHORIZED
+
+
+""" Get Specfic User Order history """
+@fff.route('/users/orders', methods=['GET'])
+@jwt_required
+@swag_from('./templates/get_user_order_history.yml')
+def get_user_order_history():
+    ''' Function get_user_order_history returns the order history of the user '''
+    current_user = get_jwt_identity()
+    username = current_user
+
+    user_access = db.check_user_pass(username)
+
+    if user_access['role_id'] == 2:
+        return jsonify({'orders': db.get_user_specific_orders_by_username(username)}), status.HTTP_200_OK
+    return jsonify({'msg': 'Only registered users allowed to access their orders'}), status.HTTP_401_UNAUTHORIZED
 
 
 @fff.route('/orders', methods=['GET'])
@@ -174,7 +200,13 @@ def place_order():
 @swag_from('./templates/get_all_order.yml')
 def get_orders():
     ''' Function get_orders returns a list a of all orders '''
-    return jsonify({'orders': db.get_all_orders()}), status.HTTP_200_OK
+    current_user = get_jwt_identity()
+    username = current_user
+    admin_user = db.check_user_pass(username)
+
+    if admin_user['role_id'] == 1:
+        return jsonify({'orders': db.get_all_orders()}), status.HTTP_200_OK
+    return jsonify({'msg': 'Admin Access only'}), status.HTTP_401_UNAUTHORIZED
 
 
 @fff.route('/orders/<int:id>', methods=['GET'])
@@ -182,7 +214,13 @@ def get_orders():
 @swag_from('./templates/get_order_by_id.yml')
 def get_order_by_id(id):
     """ Function get_order_by_id returns a specific order """
-    return jsonify({'order': db.get_order_by_id(id)}), status.HTTP_200_OK
+    current_user = get_jwt_identity()
+    username = current_user
+    admin_user = db.check_user_pass(username)
+
+    if admin_user['role_id'] == 1:
+        return jsonify({'order': db.get_order_by_id(id)}), status.HTTP_200_OK
+    return jsonify({'msg': 'Admin Access only'}), status.HTTP_401_UNAUTHORIZED
 
 
 @fff.route('/orders/<int:id>', methods=['PUT'])
@@ -190,12 +228,33 @@ def get_order_by_id(id):
 @swag_from('./templates/update_order.yml')
 def update_order_status(id):
     """ Function update_order_status updates the status of the order """
-    order_status = request.json.get('order_status', None)
+    current_user = get_jwt_identity()
+    username = current_user
+    admin_user = db.check_user_pass(username)
 
-    if not order_status:
-        return jsonify({"msg": "Missing order_status parameter"}), status.HTTP_400_BAD_REQUEST
+    if admin_user['role_id'] == 1:
+        order_status = request.json.get('order_status', None)
 
-    parsejson = request.get_json()
-    order_status = parsejson['order_status']
-    return jsonify({'order': db.update_order_status(id, order_status)}), status.HTTP_201_CREATED
+        if not order_status:
+            return jsonify({"msg": "Missing order_status parameter"}), status.HTTP_400_BAD_REQUEST
+
+        parsejson = request.get_json()
+        order_status = parsejson['order_status']
+        return jsonify({'order': db.update_order_status(id, order_status)}), status.HTTP_201_CREATED
+    return jsonify({'msg': 'Admin Access only'}), status.HTTP_401_UNAUTHORIZED
+    
+
+
+@fff.route('/orders/<int:id>', methods=['DELETE'])
+@jwt_required
+@swag_from('./templates/delete_order.yml')
+def remove_completed_order(id):
+    """ Function remove_completed_order removes finished order """
+    current_user = get_jwt_identity()
+    username = current_user
+    admin_user = db.check_user_pass(username)
+
+    if admin_user['role_id'] == 1:
+        return jsonify({'message': db.remove_completed_order(id)}), status.HTTP_200_OK
+    return jsonify({'msg': 'Admin Access only'}), status.HTTP_401_UNAUTHORIZED
 

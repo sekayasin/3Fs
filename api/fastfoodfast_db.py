@@ -34,6 +34,7 @@ class DatabaseConnection:
                 ")            
             self.db_connection.autocommit = True
             self.cursor = self.db_connection.cursor(cursor_factory=RealDictCursor)
+            self.db_connection._open_connection()
             print("Database Connection: Success")
         except:
             print("Can not onnect to any database")

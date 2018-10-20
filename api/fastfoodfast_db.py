@@ -35,8 +35,8 @@ class DatabaseConnection:
             self.db_connection.autocommit = True
             self.cursor = self.db_connection.cursor(cursor_factory=RealDictCursor)
             print("Database Connection: Success")
-        except:
-            print("Cannot connect to any database")
+        except pg2.DatabaseError as e:
+            print("Cannot connect to any database. {}".format(e))
     
     """
     Setting tables for our fastfoodfast_db

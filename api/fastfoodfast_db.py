@@ -36,7 +36,7 @@ class DatabaseConnection:
             self.cursor = self.db_connection.cursor(cursor_factory=RealDictCursor)
             print("Database Connection: Success")
         except:
-            print("Can not onnect to any database")
+            print("Cannot connect to any database")
     
     """
     Setting tables for our fastfoodfast_db

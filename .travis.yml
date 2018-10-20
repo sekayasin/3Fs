@@ -6,8 +6,6 @@ branches:
   - develop
 install:
   - pip install -r requirements.txt
-before_script:
-- psql -c 'create database fastfoodfast_test_db;' -U sekayasin
 script:
   - py.test --cov=api tests/
   - coverage report -m

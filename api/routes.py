@@ -1,4 +1,5 @@
 from flask import jsonify, request, render_template, url_for, redirect
+from flask_cors import CORS, cross_origin
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token, get_jwt_identity
 )
@@ -34,6 +35,7 @@ def index():
 
     
 @fff.route('/auth/signup', methods=['POST'])
+@cross_origin(allow_headers=['Content-Type'])
 @swag_from('./templates/signup.yml')
 def signup():
     """ Register a new user """
@@ -82,6 +84,7 @@ function is used to actually generate the token, and you can return
 it to the caller however you choose
 """
 @fff.route('/auth/login', methods=['POST'])
+@cross_origin(allow_headers=['Content-Type'])
 @swag_from('./templates/signin.yml')
 def signin():
     username = request.json.get('username', None)
@@ -110,6 +113,7 @@ def signin():
 
 """ Admin add menu option """
 @fff.route('/menu', methods=['POST'])
+@cross_origin(allow_headers=['Content-Type'])
 @jwt_required
 @swag_from('./templates/add_menu.yml')
 def add_menu_option():
@@ -142,6 +146,7 @@ def add_menu_option():
 
 """ Get Available menu """
 @fff.route('/menu', methods=['GET'])
+@cross_origin()
 @swag_from('./templates/get_menu.yml')
 def get_menu():
     """ Function get_menu returns a list of available menu at 3fs """
@@ -149,6 +154,7 @@ def get_menu():
 
 """ Place an order """
 @fff.route('/users/orders', methods=['POST'])
+@cross_origin(allow_headers=['Content-Type'])
 @jwt_required
 @swag_from('./templates/place_order.yml')
 def place_order():
@@ -181,6 +187,7 @@ def place_order():
 
 """ Get Specfic User Order history """
 @fff.route('/users/orders', methods=['GET'])
+@cross_origin()
 @jwt_required
 @swag_from('./templates/get_user_order_history.yml')
 def get_user_order_history():
@@ -196,6 +203,7 @@ def get_user_order_history():
 
 
 @fff.route('/orders', methods=['GET'])
+@cross_origin()
 @jwt_required
 @swag_from('./templates/get_all_order.yml')
 def get_orders():
@@ -210,6 +218,7 @@ def get_orders():
 
 
 @fff.route('/orders/<int:id>', methods=['GET'])
+@cross_origin()
 @jwt_required
 @swag_from('./templates/get_order_by_id.yml')
 def get_order_by_id(id):
@@ -224,6 +233,7 @@ def get_order_by_id(id):
 
 
 @fff.route('/orders/<int:id>', methods=['PUT'])
+@cross_origin(allow_headers=['Content-Type'])
 @jwt_required
 @swag_from('./templates/update_order.yml')
 def update_order_status(id):
@@ -245,6 +255,7 @@ def update_order_status(id):
     
 
 @fff.route('/orders/<int:id>', methods=['DELETE'])
+@cross_origin()
 @jwt_required
 @swag_from('./templates/delete_order.yml')
 def remove_completed_order(id):

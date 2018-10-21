@@ -268,3 +268,4 @@ def remove_completed_order(id):
         return jsonify({'message': db.remove_completed_order(id)}), status.HTTP_200_OK
     return jsonify({'msg': 'Admin Access only'}), status.HTTP_401_UNAUTHORIZED
 
+    

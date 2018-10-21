@@ -5,22 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
-        <link rel="stylesheet" href="res/vendors/css/ionicons.min.css">
-        <link rel="stylesheet" href="res/css/style.css">
+        <link rel="stylesheet" href="../res/vendors/css/ionicons.min.css">
+        <link rel="stylesheet" href="../res/css/style.css">
         <title>johndoe - 3Fs•Fast-Food-Fast</title>
     </head>
     <body>
         <section class="userdashboard-header">
             <div class="row">
                 <div class="clearfix">
-                    <a href="johndoe.html">
+                    <a href="customer.html">
                         <div class="userdashboard-title">
                             <div class="imagebox">
                                 <div class="imgShow">
-                                    <img src="res/img/3FsLogo_black.png" alt="fast-food-fast logo dark">
+                                    <img src="../res/img/3FsLogo_black.png" alt="fast-food-fast logo dark">
                                 </div>
                                 <div class="imgHover">
-                                    <img src="res/img/3FsLogo_color.png" alt="fast-food-fast logo color">
+                                    <img src="../res/img/3FsLogo_color.png" alt="fast-food-fast logo color">
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                             <li><a href="#"><i class="ion-android-notifications-none"></i></a></li>
                             <li><a href="#"><i class="ion-ios-person-outline"></i><span>Welcome, John Doe</span></a></li>
                             <li><a href="#"><i class="ion-ios-cart-outline"></i></a></li>
-                            <li><a href="logout.html"><i class="ion-log-out"></i><span>logout</span></a></li>
+                            <li><a href="../logout/logout.html"><i class="ion-log-out"></i><span>logout</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -41,10 +41,10 @@
 
         <section class="userdashboard-links">
             <div class="row">
-                <ul class="dashboard-links-order-history">
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="dashboard.html">Place order</a></li>
-                    <li><a href="#">Order history</a></li>
+                <ul class="dashboard-links">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Place order</a></li>
+                    <li><a href="orderhistory.html">Order history</a></li>
                     <li><a href="#">Terms &amp; conditions</a></li>
                     <li><a href="#"><i class="ion-ios-plus-empty"></i>ADD funds</a></li>
                 </ul>
@@ -106,11 +106,11 @@
             </div>
 
             <div class="row">
-                <div class="order-history">
-                    <ul class="order-history-header">
+                <div class="order-table-header">
+                    <ul class="order-header">
                         <li><a href="#"><i class="ion-speakerphone"></i><span>Announcements</span></a></li>
-                        <li><a href="dashboard.html">Place Order</a></li>
-                        <li><a href="#">Last 20 Orders</a></li>
+                        <li><a href="#">Place Order</a></li>
+                        <li><a href="orderhistory.html">Last 20 Orders</a></li>
                         <li><a href="#">Pending Invoices</a></li>
                         <li><a href="#">Top Menu Courses</a></li>
                         <li><a href="#">Top Appetizer</a></li>
@@ -118,36 +118,53 @@
                     </ul>
                 </div>
                 
-                <div class="order-history-details col">
-                    <div class="order-id col-flex">#Order ID</div>
-                    <div class="order-name col-flex">Order Description</div>
-                    <div class="order-report col-flex">Order Report</div>
-                    <div class="order-status col-flex">Order Status</div>
-                    <div class="order-date col-flex">Order Date</div>
+                <div class="make-order">
+                    <select name="order-list" id="#" class="order-select-list">
+                        <option value="Add New Order">- Select Your Favourite dish, meal course here -</option>
+                        <option value="Rolex">Nyanya Mbisi, chapati ssatu, maggi assatu, butungulu ne cabbage - 20K UGX</option>
+                        <option value="oysters Grill">Cheese, Jalape, chilli, Onion - 20K UGX</option>
+                        <option value="Kikomando">Biri supu ne eggi - 25K UGX</option>
+                        <option value="oysters Grill">pilawo ne supu w'enkoko - 30K UGX</option>
+                        <option value="oysters Grill">Cheese, Jalape, chilli, Onion - 35k UGX</option>
+                        <option value="oysters Grill">Cheese, Jalape, chilli, Onion - 20K UGX</option>
+                    </select>
+                    <a href="#mk-order" class="add-order"><i class="ion-ios-plus-empty"></i>Add Item</a>
+                </div>
+
+                <div class="orders col" id="mk-order">
+                    <div class="order-number col-flex">1</div>
+                    <div class="order-img col-flex"><i class="ion-android-restaurant"></i></div>
+                    <div class="order-name col-flex">Biri Supu n'eggi</div>
+                    <div class="order-cost col-flex">25K UGX</div>
+                    <div class="order-remove col-flex"><a href="#"><i class="ion-ios-close-empty"></i><span>Remove Item</span></a></div>
                 </div>
 
                 <div class="orders col">
-                    <div class="order-number col-flex"><a href="#"><strong>313A977</strong></a></div>
-                    <div class="order-name col-flex">Kapilawo ne supu w'enkoko</div>
-                    <div class="order-report col-flex">Order Delivered by Owakabi Driver <br> Order Recieved &amp; Approved by Jane Doe</div>
-                    <div class="order-status col-flex"><span class="success">Success</span></div>
-                    <div class="order-date col-flex">07/09/2018 <br>09:58:00 PM</div>
-                </div>
-
-                <div class="orders col">
-                    <div class="order-number col-flex"><a href="#"><strong>313A919</strong></a></div>
+                    <div class="order-number col-flex">2</div>
+                    <div class="order-img col-flex"><i class="ion-android-restaurant"></i></div>
                     <div class="order-name col-flex">Nyanya Mbisi, chapati Biri, maggi assatu, butungulu ne ka'cabbage</div>
-                    <div class="order-report col-flex">Arrragh! Tetulina Nyanya mbisi kati!</div>
-                    <div class="order-status col-flex"><span class="rejected">Rejected</span></div>
-                    <div class="order-date col-flex">01/09/2018 <br>01:58:00 AM</div>
+                    <div class="order-cost col-flex">20K UGX</div>
+                    <div class="order-remove col-flex"><a href="#"><i class="ion-ios-close-empty"></i><span>Remove Item</span></a></div>
                 </div>
 
                 <div class="orders col">
-                    <div class="order-number col-flex"><a href="#"><strong>CC91BB</strong></a></div>
+                    <div class="order-number col-flex">3</div>
+                    <div class="order-img col-flex"><i class="ion-android-restaurant"></i></div>
                     <div class="order-name col-flex">Kapilawo ne supu w'enkoko</div>
-                    <div class="order-report col-flex">Order Delivered by Ssalongo Boda <br> Order Recieved &amp; Approved by John Doe</div>
-                    <div class="order-status col-flex"><span class="success">Success</span></div>
-                    <div class="order-date col-flex">25/08/2018 <br>10:30:00 AM</div>
+                    <div class="order-cost col-flex">30K UGX</div>
+                    <div class="order-remove col-flex"><a href="#"><i class="ion-ios-close-empty"></i><span>Remove Item</span></a></div>
+                </div>
+
+                <div class="orders col">
+                    <div class="order-number col-flex">&nbsp;</div>
+                    <div class="order-img col-flex">&nbsp;</div>
+                    <div class="order-name col-flex"><strong>Total</strong></div>
+                    <div class="order-cost col-flex"><strong>75K UGX</strong></div>
+                    <div class="order-remove col-flex">&nbsp;</div>
+                </div>
+
+                <div class="proceed-to-checkout">
+                    <a href="#">Proceed to checkout</a>
                 </div>
             </div>
         </section><!-- End Dashboard links, stats, order table -->

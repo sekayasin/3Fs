@@ -11,6 +11,8 @@ services:
 before_script:
   - psql -c "CREATE USER sekayasin WITH PASSWORD '';" -U postgres
   - psql -c 'create database fastfoodfast_test_db;' -U postgres
+  - psql -c "CREATE USER gjgjeoxmwaoipq WITH PASSWORD '403fa6bb565ae3bc600488f58fd1e5d4acaef14d92bc7749065ed1fc2f89aca6';" -U postgres
+  - psql -c 'create database d3h5fquda8ms9u;' -U postgres
 script:
   - py.test --cov=api tests/
   - coverage report -m

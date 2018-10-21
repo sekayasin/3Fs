@@ -12,6 +12,7 @@ class DatabaseConnection:
     host='localhost' 
     port='5432' 
     user='sekayasin'
+    sslmode='require'
 
     Heroku rotates credentials periodically and 
     updates applications where this database is attached.
@@ -21,16 +22,19 @@ class DatabaseConnection:
     User gjgjeoxmwaoipq
     Port 5432
     Password 403fa6bb565ae3bc600488f58fd1e5d4acaef14d92bc7749065ed1fc2f89aca6
+    URI postgres://gjgjeoxmwaoipq:403fa6bb565ae3bc600488f58fd1e5d4acaef14d92bc7749065ed1fc2f89aca6@ec2-54-225-68-133.compute-1.amazonaws.com:5432/d3h5fquda8ms9u
     """
+
+    # DATABASE_URL = os.environ['postgres://gjgjeoxmwaoipq:403fa6bb565ae3bc600488f58fd1e5d4acaef14d92bc7749065ed1fc2f89aca6@ec2-54-225-68-133.compute-1.amazonaws.com:5432/d3h5fquda8ms9u']
 
     def __init__(self):
         try:
             self.db_connection = pg2.connect(
-                "dbname='fastfoodfast_test_db' \
-                password='' \
-                host='localhost' \
+                "dbname='d3h5fquda8ms9u' \
+                password='403fa6bb565ae3bc600488f58fd1e5d4acaef14d92bc7749065ed1fc2f89aca6' \
+                host='ec2-54-225-68-133.compute-1.amazonaws.com' \
                 port='5432' \
-                user='sekayasin'\
+                user='gjgjeoxmwaoipq'\
                 ")            
             self.db_connection.autocommit = True
             self.cursor = self.db_connection.cursor(cursor_factory=RealDictCursor)

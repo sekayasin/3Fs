@@ -48,7 +48,7 @@
 
         <section class="signin-form-section">
             <div class="row">
-                <form action="dashboard.html" class="signin-form">
+                <form action="../userdashboard/dashboard.html" class="signin-form" id="mySiginFormLogoutPage">
                     <div class="signin-form-title">
                         <p>Sign In</p>
                     </div>
@@ -58,12 +58,12 @@
                     </div>
 
                     <div class="form-elements">
-                        <label for="username">Sign in as</label>
-                        <input type="text" name="username" placeholder="john.doe@example.com" required>
+                        <label for="username" id="usernameerror">Sign in as</label>
+                        <input type="text" name="username" id="username" placeholder="username" required>
                     </div>
 
                     <div class="form-elements">
-                        <label for="password">Password</label>
+                        <label for="password" id="userpasserror">Password</label>
                         <input type="password" name="password" required>
                     </div>
 
@@ -130,5 +130,6 @@
                 </p>
             </div>
         </footer>
+        <script src="../res/js/logout.js"></script>
     </body>
 </html>

@@ -72,9 +72,8 @@ def signup():
     address = parsejson['address']
     tel = parsejson['tel']
     if firstname and lastname and username and password and password and email and address and tel:
-        db.user_sign_up(firstname, lastname, username, password, email, address, tel)
         return jsonify({
-            'message': 'Hi {}!, You have successful created an account on fast-food-fast'.format(username)
+            'message': db.user_sign_up(firstname, lastname, username, password, email, address, tel)
             }), status.HTTP_201_CREATED
     
 
@@ -105,7 +104,7 @@ def signin():
             if password == user["password"]:
                 """ Identity can be any data that is json serializable """ 
                 access_token = create_access_token(identity=username)
-                return jsonify(access_token=access_token), status.HTTP_200_OK
+                return jsonify({'access_token':access_token, 'role_id': user["role_id"]}), status.HTTP_200_OK
             return jsonify({"msg": "Invalid Password"})
     except TypeError:
         return jsonify({"msg": "Invalid Username"}) 
@@ -139,8 +138,7 @@ def add_menu_option():
         dishtoppings = parsejson['dish_toppings']
         
         if dishname and dishprice and dishtoppings:
-            db.add_menu(dishname, dishprice, dishtoppings)
-            return jsonify({'msg': '{} has been added on the menu'.format(dishname)}), status.HTTP_201_CREATED
+            return jsonify({'msg': db.add_menu(dishname, dishprice, dishtoppings)}), status.HTTP_201_CREATED
     return jsonify({'msg': 'Admin Access only'}), status.HTTP_401_UNAUTHORIZED
 
 
@@ -268,4 +266,20 @@ def remove_completed_order(id):
         return jsonify({'message': db.remove_completed_order(id)}), status.HTTP_200_OK
     return jsonify({'msg': 'Admin Access only'}), status.HTTP_401_UNAUTHORIZED
 
-    
+
+@fff.route('/users/info', methods=['GET'])
+@cross_origin()
+@jwt_required
+def get_user_info():
+    """ Function to get user info """
+    current_user = get_jwt_identity()
+    username = current_user
+    user_info = db.check_user_pass(username)
+
+    return jsonify({
+        'first_name': user_info['first_name'],
+        'last_name': user_info['last_name'],
+        'email': user_info['email'],
+        'address': user_info['address'],
+        'tel': user_info['tel']
+    }), status.HTTP_200_OK

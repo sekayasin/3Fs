@@ -144,13 +144,23 @@ class DatabaseConnection:
         :param str tel: the mobile contact of the customer
         """
         self.role_id = 2
-        self.first_name = first_name
-        self.last_name = last_name
-        self.username = username
-        self.password = password
-        self.email = email
-        self.address = address
-        self.tel = tel
+        self.first_name = " ".join(first_name.split()).lower()
+        self.last_name = " ".join(last_name.split()).lower()
+        self.username = " ".join(username.split()).lower()
+        self.password = " ".join(password.split()).lower()
+        self.email = " ".join(email.split()).lower()
+        self.address = " ".join(address.split()).lower()
+        self.tel = "-".join(tel.split())
+
+        checkusername_sql = """ SELECT * from users WHERE username = '{}'""".format(self.username)
+        self.cursor.execute(checkusername_sql)
+        if self.cursor.rowcount > 0:
+            return "Username {} is already taken, choose another username".format(self.username)
+
+        checkemail_sql = """ SELECT * from users WHERE email = '{}'""".format(self.email)
+        self.cursor.execute(checkemail_sql)
+        if self.cursor.rowcount > 0:
+            return "Your email {} already exists, choose another email".format(self.email)
 
         sql = """ INSERT INTO users(
             role_id,
@@ -163,17 +173,17 @@ class DatabaseConnection:
             tel)
             VALUES('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')""".format(
                 self.role_id,
-                first_name,
-                last_name,
-                username,
-                password,
-                email,
-                address,
-                tel 
+                self.first_name,
+                self.last_name,
+                self.username,
+                self.password,
+                self.email,
+                self.address,
+                self.tel 
             )
 
-        self.cursor.execute(sql,(first_name, last_name, username, password, email, address, tel))
-        print("User creation: Success")
+        self.cursor.execute(sql,(self.first_name, self.last_name, self.username, self.password, self.email, self.address, self.tel))
+        return "Hi {}!, You have successful created an account on fast-food-fast".format(self.username)
     
     def staff_sign_up(self, first_name, last_name, username, password, email, address, tel):
         """
@@ -188,13 +198,23 @@ class DatabaseConnection:
         :param str tel: the mobile contact of the staff
         """
         self.role_id = 1
-        self.first_name = first_name
-        self.last_name = last_name
-        self.username = username
-        self.password = password
-        self.email = email
-        self.address = address
-        self.tel = tel
+        self.first_name = " ".join(first_name.split()).lower()
+        self.last_name = " ".join(last_name.split()).lower()
+        self.username = " ".join(username.split()).lower()
+        self.password = " ".join(password.split()).lower()
+        self.email = " ".join(email.split()).lower()
+        self.address = " ".join(address.split()).lower()
+        self.tel = "-".join(tel.split())
+
+        checkusername_sql = """ SELECT * from users WHERE username = '{}'""".format(self.username)
+        self.cursor.execute(checkusername_sql)
+        if self.cursor.rowcount > 0:
+            return "Username {} is already taken, choose another username".format(self.username)
+
+        checkemail_sql = """ SELECT * from users WHERE email = '{}'""".format(self.email)
+        self.cursor.execute(checkemail_sql)
+        if self.cursor.rowcount > 0:
+            return "Your email {} already exists, choose another email".format(self.email)
 
         sql = """ INSERT INTO users(
             role_id,
@@ -207,17 +227,17 @@ class DatabaseConnection:
             tel)
             VALUES('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')""".format(
                 self.role_id,
-                first_name,
-                last_name,
-                username,
-                password,
-                email,
-                address,
-                tel
+                self.first_name,
+                self.last_name,
+                self.username,
+                self.password,
+                self.email,
+                self.address,
+                self.tel
             )
 
-        self.cursor.execute(sql,(first_name, last_name, username, password, email, address, tel))
-        print("Staff creation: Success")
+        self.cursor.execute(sql,(self.first_name, self.last_name, self.username, self.password, self.email, self.address, self.tel))
+        return "Hi Admin {}!, You have successful created an account on fast-food-fast".format(self.username)
     
     def check_user_pass(self, username):
         """
@@ -237,22 +257,30 @@ class DatabaseConnection:
         :param int dish_price: cost of the dish
         :param str dish_toppings: Addons on the dish
         """
-        self.dish_name = dish_name
+        self.dish_name = " ".join(dish_name.split()).lower()
         self.dish_price = dish_price
-        self.dish_toppings = dish_toppings
+        self.dish_toppings = " ".join(dish_toppings.split()).lower()
+
+        check_dish_name_sql = """ SELECT * from menu WHERE dish_name = '{}'""".format(self.dish_name)
+        self.cursor.execute(check_dish_name_sql)
+        if self.cursor.rowcount > 0: 
+            return "Dish name {} is already on the menu".format(self.dish_name)
+        
+        if not isinstance(self.dish_price, int):
+            return "Dish price must be a real price in a number-integer value"
 
         sql = """ INSERT INTO menu(
             dish_name,
             dish_price,
             dish_toppings)
             VALUES('{}', '{}', '{}')""".format(
-                dish_name,
-                dish_price,
-                dish_toppings
+                self.dish_name,
+                self.dish_price,
+                self.dish_toppings
             )
 
-        self.cursor.execute(sql,(dish_name, dish_price, dish_toppings))
-        print("dish creation: Success")
+        self.cursor.execute(sql,(self.dish_name, self.dish_price, self.dish_toppings))
+        return '{} has been added on the menu'.format(self.dish_name)
     
     def get_menu(self):
         """
@@ -290,7 +318,6 @@ class DatabaseConnection:
         else:
             return "Sorry, That Meal type of meal is not available, check again todays menu"
         
-
         self.user_id = get_user_dict['user_id']
         self.dish_id = get_meal_dict['dish_id']
         self.order_quantity = order_quantity
@@ -298,6 +325,12 @@ class DatabaseConnection:
         self.order_status = "NEW"
         self.order_timestamp = str(datetime.now())
 
+        if not isinstance(self.order_quantity, int):
+            return "Order quantity must be in a number-integer value"
+        
+        if not isinstance(self.total_order_cost, int):
+            return "Order quantity must be in a real price number-integer value"
+        
         sql = """ INSERT INTO orders(
             user_id,
             dish_id,
@@ -313,7 +346,7 @@ class DatabaseConnection:
                 self.order_status,
                 self.order_timestamp)
         
-        self.cursor.execute(sql, (order_quantity, total_order_cost))
+        self.cursor.execute(sql, (self.order_quantity, self.total_order_cost))
         return "You\'ve successfully placed an order, Your Request is forwarded to our master chef"
 
     def get_all_orders(self):

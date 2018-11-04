@@ -155,12 +155,12 @@ class DatabaseConnection:
         checkusername_sql = """ SELECT * from users WHERE username = '{}'""".format(self.username)
         self.cursor.execute(checkusername_sql)
         if self.cursor.rowcount > 0:
-            return "Username {} is already taken, choose another username".format(self.username)
+            return "Username Available, Try Again"
 
         checkemail_sql = """ SELECT * from users WHERE email = '{}'""".format(self.email)
         self.cursor.execute(checkemail_sql)
         if self.cursor.rowcount > 0:
-            return "Your email {} already exists, choose another email".format(self.email)
+            return "Email Available, Try Again"
 
         sql = """ INSERT INTO users(
             role_id,
@@ -183,7 +183,7 @@ class DatabaseConnection:
             )
 
         self.cursor.execute(sql,(self.first_name, self.last_name, self.username, self.password, self.email, self.address, self.tel))
-        return "Hi {}!, You have successful created an account on fast-food-fast".format(self.username)
+        return "Success"
     
     def staff_sign_up(self, first_name, last_name, username, password, email, address, tel):
         """
@@ -209,12 +209,12 @@ class DatabaseConnection:
         checkusername_sql = """ SELECT * from users WHERE username = '{}'""".format(self.username)
         self.cursor.execute(checkusername_sql)
         if self.cursor.rowcount > 0:
-            return "Username {} is already taken, choose another username".format(self.username)
+            return "Username Available, Try Again"
 
         checkemail_sql = """ SELECT * from users WHERE email = '{}'""".format(self.email)
         self.cursor.execute(checkemail_sql)
         if self.cursor.rowcount > 0:
-            return "Your email {} already exists, choose another email".format(self.email)
+            return "Email Available, Try Again"
 
         sql = """ INSERT INTO users(
             role_id,
@@ -237,7 +237,7 @@ class DatabaseConnection:
             )
 
         self.cursor.execute(sql,(self.first_name, self.last_name, self.username, self.password, self.email, self.address, self.tel))
-        return "Hi Admin {}!, You have successful created an account on fast-food-fast".format(self.username)
+        return "Admin Success"
     
     def check_user_pass(self, username):
         """

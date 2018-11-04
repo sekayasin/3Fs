@@ -1375,3 +1375,13 @@ input[type=submit]:hover {
 .add-new-item-btn a:hover {
     background-color: #d35400;
 }
+
+/* ---------------------------------------------------- */
+/* Js DOM Manipulation display errors */
+/* ---------------------------------------------------- */
+
+/* Signin Form */
+/* #usernameerror, 
+#userpasserror {
+    color: #ff0000;
+} */

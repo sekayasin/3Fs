@@ -62,19 +62,21 @@ function SignupUser(data) {
     .then( function(json_data){
         console.log(json_data);
         if(json_data.message == "Username Available, Try Again") {
-            // setTimeout(function(){
-            //     document.getElementById('usernametaken').innerHTML = '<span style="color:#ff0000">'+json_data.message+'</span>';
-            // }, 5000);
             document.getElementById('usernametaken').innerHTML = '<span style="color:#ff0000">'+json_data.message+'</span>';
-        
-            window.location.reload(true);
+            
+            setTimeout(() => window.location.reload(true), 3000);
+            
         }
+
         if(json_data.message == "Email Available, Try Again") {
-            document.getElementById('emailtaken').innerHTML = '<span style="color:#ff0000">'+json_data.msg+'</span>';
-            window.location.reload(true);
+            document.getElementById('emailtaken').innerHTML = '<span style="color:#ff0000">'+json_data.message+'</span>';
+            
+            setTimeout(() => window.location.reload(true), 3000);
         }
+
         if(json_data.message == "Success") {
-            window.location.replace('../signinup/signin.html');
+            alert("Your Account Successful created, Redirecting to sigin page");
+            setTimeout(() => window.location.replace('../signinup/signin.html'), 3000);
         }
     })
     .catch(error => console.log(error))

@@ -48,7 +48,11 @@ function SigninUser(data) {
             sessionStorage.setItem('token', json_data.access_token);
             username = document.getElementById('username').value;
             sessionStorage.setItem('username', username);
-            window.location.replace('../userdashboard/dashboard.html');
+            if (json_data.role_id === 2) {
+                window.location.replace('../userdashboard/dashboard.html');
+            } else if(json_data.role_id === 1){
+                window.location.replace('../admindashboard/admindashboard.html');
+            }
         }
     })
     .catch(error => console.log(error))

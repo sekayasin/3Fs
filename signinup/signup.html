@@ -47,36 +47,36 @@
                 </div>
             </div>
             <div class="row">
-                <form action="signin.html" class="signup-form">
+                <form action="signin.html" class="signup-form" id="mySignupForm">
 
                     <div class="form-elements">
-                        <label for="fname">First Name</label>
-                        <input type="text" name="fname" placeholder="Enter your fist name" required>
+                        <label for="first_name">First Name</label>
+                        <input type="text" name="first_name" placeholder="Enter your fist name" required>
                     </div>
 
                     <div class="form-elements">
-                        <label for="lname">Other name</label>
-                        <input type="text" name="lname" placeholder="Enter your other name" required>
+                        <label for="last_name">Other name</label>
+                        <input type="text" name="last_name" placeholder="Enter your other name" required>
                     </div>
 
                     <div class="form-elements">
-                        <label for="username">Username</label>
+                        <label for="username" id="usernametaken">Username</label>
                         <input type="text" name="username" placeholder="Enter your preferred username" required>
                     </div>
 
                     <div class="form-elements">
                         <label for="password">Password</label>
-                        <input type="password" name="password" placeholder="••••••" required>
+                        <input type="password" id = "password" name="password" placeholder="••••••" required>
                     </div>
 
                     <div class="form-elements">
-                        <label for="confirm_pass">Confirm Password</label>
-                        <input type="password" name="confirm_pass" placeholder="••••••" required>
+                        <label for="confirm_pass" id="password_mismatch">Confirm Password</label>
+                        <input type="password" id = "confirm_pass" name="confirm_pass" placeholder="••••••" required>
                     </div>
 
                     <div class="form-elements">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" placeholder="Enter your email address" required>
+                        <label for="email" id="emailtaken">Email</label>
+                        <input type="email" id ="email" name="email" placeholder="Enter your email address" required>
                     </div>
 
                     <div class="form-elements">
@@ -153,5 +153,6 @@
                 </p>
             </div>
         </footer>
+        <script src="../res/js/signup.js"></script>
     </body>
 </html>

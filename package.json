@@ -1,0 +1,71 @@
+{
+  "name": "3fs",
+  "version": "1.0.0",
+  "description": "Fast Food Fast (3Fs) is a food delivery service app for a restaurant",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development",
+    "build": "webpack --mode production",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "format": "prettier --write \"src/**/*.{js.jsx,css,html,json}\"",
+    "format:check": "prettier --list-different \"src/**/*.{js.jsx,css,html,json}\"",
+    "lint": "eslint \"src/**/*.{js,jsx}\"",
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>__tests__/setup/SetupEnzyme.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+    },
+    "testPathIgnorePatterns": [
+      "<rootDir>/__tests__/setup/"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sekayasin/3Fs.git"
+  },
+  "author": "sekayasin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sekayasin/3Fs/issues"
+  },
+  "homepage": "https://github.com/sekayasin/3Fs#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.1.0",
+    "babel-loader": "^8.0.5",
+    "coveralls": "^3.0.2",
+    "css-loader": "^2.1.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "enzyme-to-json": "^3.3.5",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "file-loader": "^3.0.1",
+    "jest": "^24.1.0",
+    "prettier": "^1.16.4",
+    "redux-mock-store": "^1.5.3",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.1",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-hot-loader": "^4.6.5"
+  }
+}

@@ -1375,7 +1375,6 @@ input[type='submit']:hover {
 /* ---------------------------------------------------- */
 
 /* Signin Form */
-/* #usernameerror, 
-#userpasserror {
+.is-invalid {
   color: #ff0000;
-} */
+}

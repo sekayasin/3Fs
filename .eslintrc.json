@@ -18,7 +18,17 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prefer-stateless-function": "off",
     "prettier/prettier": ["error"],
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "global-require": 0,
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelComponents": ["label"],
+        "labelAttributes": ["htmlFor"],
+        "controlComponents": ["input"]
+      }
+    ],
+    "react/no-unescaped-entities": 0
   },
   "parserOptions": {
     "ecmaVersion": 2018,

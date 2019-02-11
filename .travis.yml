@@ -1,7 +1,8 @@
 language: node_js
 node_js:
   - 'lts/*'
-addons: code_climate
+addons: 
+  code_climate
 cache:
   directories:
     - node_modules
@@ -10,8 +11,8 @@ env:
     - CC_TEST_REPORTER_ID=8a2b1e533c378f87c186df7d54b916d614233e6d50963612fbb585337ec1e465
 before_scripts:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x .//cc-test-reporter
-  - .//cc-test-reporter before-build
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 install:
   - yarn
 script:

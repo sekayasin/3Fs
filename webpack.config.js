@@ -35,10 +35,8 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: path.join(__dirname, 'public/'),
     port: 3000,
-    publicPath: '/',
-    hotOnly: true,
+    // hotOnly: true,
     historyApiFallback: true
   },
   plugins: [

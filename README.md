@@ -5,24 +5,83 @@
 [![Build Status](https://travis-ci.org/sekayasin/3Fs.svg?branch=3fs-react-fe)](https://travis-ci.org/sekayasin/3Fs)
 [![Coverage Status](https://coveralls.io/repos/github/sekayasin/3Fs/badge.svg?branch=3fs-react-fe)](https://coveralls.io/github/sekayasin/3Fs?branch=3fs-react-fe)
 [![Maintainability](https://api.codeclimate.com/v1/badges/265ca6d8e55d6437cffa/maintainability)](https://codeclimate.com/github/sekayasin/3Fs/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/265ca6d8e55d6437cffa/test_coverage)](https://codeclimate.com/github/sekayasin/3Fs/test_coverage)
+
+###### :page_facing_up: NOTE
+3Fs Project is a living playground project that I use to quickly aid my learning of any framework/language i wish to learn.
+
+## 3Fs Web App - Reactify Frontend (Reactjs)
+Setting up 3Fs Frontend Environment with Reactjs - with Webpack and Babel
+
+------------
+
+##### 3Fs React Frontend Project Setup
+
+------------
+
+1. Clone the Repository
+` https://github.com/sekayasin/3Fs.git `
+
+2. Navigate to the application directory
+` cd 3fs-react-fe `
+
+3. install all dependencies
+` yarn install`
+
+4. Run the application
+` yarn start `
+
+5. Run 3Fs React Web App locally in the browser
+` http://localhost:3000 `
+
+------------
+
+###### 3Fs Reactify Frontend Available Endpoints working
+
+| URL     | Methods | Functionality       |
+| ------- | ------- | ------------------- |
+| sign-up | __POST__ /auth/signup   | `signs up a user `  |
+| log-in   | __POST__ /auth/signin    | `Logs in a user`    |
+
+------------
+
+###### :microscope: 3Fs Reactify Frontend - Run Tests
+
+- [x] Tests for components
+- [x] Tests for reducers
+- [x] Tests for actions 
+
+- command to run tests:
+    ` yarn test -u `
+
+- command to run tests with coverage:
+    ` yarn test -u --coverage ` 
+      
+------------
+
+###### 3Fs Reactify Frontend Demo
+
+>The application is deployed [here](https://sekayasin-3fs-react-webapp.herokuapp.com/)
+
+
+------------
+
+
+## 3Fs Web App - Vanila Js
+3Fs Web App is hosted on Heroku [here](https://sekayasin-3fs-webapp.herokuapp.com)
+
+## 3Fs API v2
+3Fs API v2 is hosted on Heroku [here](https://sekayasin-3fs-apiv2.herokuapp.com)
+
+## 3Fs API v1
+3Fs API v1 is hosted on Heroku <a href="https://sekayasin-3fs-api.herokuapp.com/">here</a>
+
+## Project Progress managed with PivotalTracker 
+You can check on the project progress board <a href="https://www.pivotaltracker.com/n/projects/2195804">here</a>
 
 ## 3Fs Demo UI Templates on GitHub Pages
 3Fs Demo Website hosted on GitHub pages <a href="https://sekayasin.github.io/3Fs/UI">here</a>
 ### For 3Fs Admin only - UI Templates
 3Fs Admin Login URL can be found <a href="https://sekayasin.github.io/3Fs/UI/admin.html">here</a>
-
-## Project Progress managed with PivotalTracker 
-You can check on the project progress board <a href="https://www.pivotaltracker.com/n/projects/2195804">here</a>
-
-## 3Fs API v1
-3Fs API v1 is hosted on Heroku <a href="https://sekayasin-3fs-api.herokuapp.com/">here</a>
-
-## 3Fs API v2
-3Fs API v2 is hosted on Heroku [here](https://sekayasin-3fs-apiv2.herokuapp.com)
-
-## 3Fs Web App
-3Fs Web App is hosted on Heroku [here](https://sekayasin-3fs-webapp.herokuapp.com)
 
 The 3Fs API will serve two parties, the 3fs client(customer) and the administrator (admin).\
 The client will use the api to place an order, query his/her latest orders, and also query a specific order.\

@@ -127,7 +127,7 @@ class Landing extends Component {
             <li>
               <figure className="meal-sample">
                 <img
-                  src="https://source.unsplash.com/lqyJE0XnGf4/800x600"
+                  src="https://source.unsplash.com/9gpERFdyDW4/800x600"
                   alt="flatlay of slice citrus on table"
                 />
               </figure>
@@ -135,7 +135,7 @@ class Landing extends Component {
             <li>
               <figure className="meal-sample">
                 <img
-                  src="https://source.unsplash.com/qDQljlZCxz0/800x600"
+                  src="https://source.unsplash.com/IGfIGP5ONV0/800x600"
                   alt="glass pitcher filled kiwi juice"
                 />
               </figure>

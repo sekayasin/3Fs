@@ -11,7 +11,7 @@ const props = {
 
 const state = {
   auth: '',
-  errors: 'invalid'
+  errors: { message: 'invalid username' }
 };
 
 describe('test login', () => {
@@ -37,6 +37,8 @@ describe('test login', () => {
     expect(loginUser).toBeCalled();
   });
   it('maps state to props', () => {
-    expect(mapStateToProps(state).errors).toEqual('invalid');
+    expect(mapStateToProps(state).errors).toEqual({
+      message: 'invalid username'
+    });
   });
 });

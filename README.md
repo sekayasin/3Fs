@@ -10,6 +10,123 @@
 
 3Fs Project is a living playground project that I use to quickly aid my learning of any framework/language i wish to learn.
 
+## Dockerizing a React app and Deploying the app to a Kubernetes Cluster
+
+Using Containers for Deployment
+
+---
+
+##### Dockerizing 3Fs app and deploy it to K8s Cluster on GCP
+
+---
+
+[Screencast](https://drive.google.com/open?id=1YF1_AI-vUlPt8c2iMQ42hjvn3xW_QlmT) showing how the app is dockerized and deployed to K8s cluster on GCP
+
+Using Docker - a popular containerization tool
+
+1. A Docker image of the app is created using Docker multi-stage builds, this will result in building a leaner image, which leads to faster deployment and a more efficient containerization in production.
+
+Here is our Dockerfile
+
+```
+## STAGE 1: BUILD ##
+FROM node:lts-alpine as build
+
+RUN mkdir -p /usr/src/app
+
+WORKDIR /usr/src/app
+
+RUN npm install yarn -g
+
+COPY package.json /usr/src/app/package.json
+
+RUN yarn
+
+COPY . /usr/src/app
+
+RUN yarn build
+
+## STAGE 2: PRODUCTION ##
+
+FROM nginx:1.14.2-alpine
+
+COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+
+```
+
+STAGE 1: The Build
+
+We extend our image from a Node.js LTS alpine base image and label it as `build`
+COPY `package.json` file at first, rather than the whole working directory which allows us to take advantage of Docker's cache layers
+Install all our dependencies using `yarn`
+COPY our app sources and build it with `yarn build`. Our app is now ready for production
+
+STAGE 2: The Production
+
+Since all we need to run the app is a web server. We start stage two by extending the Nginx base image based on Alpine, this will lead to slimmer image in general
+COPY over the contents of dist directory to Nginx default document root directory. Docker allows us to reference the results of the first stage by the label we provided: `build`
+Nginx will serve on port 80, we expose it - We map this port to a port on the host running the container
+Finally we define default command which Docker will run when executing the container.
+
+Build and Run the Docker Image
+Having everything in place, we can build and tag the image by running `docker build` within your projects directory.
+
+```
+docker build -t 3fs-demo .
+
+docker image ls
+REPOSITORY                                             TAG                 IMAGE ID            CREATED             SIZE
+3fs-demo                                               latest              5f80284b4aec        12 hours ago        17MB
+```
+
+To run our freshly baked image, we call `docker run` command. Docker run the container and map the internal port which is used by Nginx to serve our project to port 3000 of the host system our Docker instance is running on.
+
+```
+docker run -p 3000:80 3fs-demo
+```
+
+Hang-on. We want to deploy our app to a Kubernetes cluster on GCP
+We will need to Push our docker image to container registry on GCP
+
+1. To push any local image to Container Registry, you need to first tag it with the registry name and then push the image
+
+```
+docker tag 3fs-demo eu.gcr.io/hybrid-ridge-235016/3fs-demo
+
+docker push eu.gcr.io/hybrid-ridge-235016/3fs-demo
+```
+
+`eu.gcr.io` specifies the region of the registry's storage, hosts the image in the European Union
+`hybrid-ridge-235016` is my GCP Project ID
+`3fs-demo` the source image
+
+Login to GCP cloud console and deploy the app to K8s cluster
+
+```
+gcloud config set project <projectID>
+gcloud config set compute/zone <zone>
+
+# create a cluster
+gcloud container clusters create <myCluster>
+
+# fetch cluster authentication credentials
+gcloud container clusters get-credentials <myCluster>
+
+# run your first deployment
+kubectl run fastfood-demo --image eu.gcr.io/<projectID/image> --port 80
+
+# expose the service
+kubectl expose deployment fastfood-demo --type LoadBalancer
+```
+
+App is deployed on K8s cluster. Can be reached using this IP: http://35.246.29.36/
+
+---
+
 ## 3Fs Web App - Reactify Frontend (Reactjs)
 
 Setting up 3Fs Frontend Environment with Reactjs - with Webpack and Babel

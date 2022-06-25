@@ -71,7 +71,7 @@
     "fetch-mock": "^7.3.0",
     "history": "^4.7.2",
     "msg-notify": "^1.1.3",
-    "node-fetch": "^2.3.0",
+    "node-fetch": "^2.6.7",
     "path": "^0.12.7",
     "prop-types": "^15.7.1",
     "react": "^16.7.0",

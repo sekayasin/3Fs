@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "fetch-mock": "^7.3.0",
     "history": "^4.7.2",
     "msg-notify": "^1.1.3",
